@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+apply plugin: 'signing'
+apply plugin: 'com.bmuschko.nexus'
+
+group = 'com.ramotion.garlandview'
+version = '0.1.0'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName version
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    testCompile 'junit:junit:4.12'
+}
+
+modifyPom {
+    project {
+        name 'Garland View for Android'
+        description 'GarlandView seamlessly transitions between multiple lists of content. http://ramotion.com'
+        url 'https://github.com/Ramotion/garland-view-android'
+        inceptionYear '2017'
+
+        scm {
+            url 'https://github.com/Ramotion/garland-view-android'
+            connection 'scm:git@github.com:Ramotion/garland-view-android.git'
+            developerConnection 'scm:git@github.com:Ramotion/garland-view-android.git'
+        }
+
+        licenses {
+            license {
+                name 'The MIT License (MIT)'
+                url 'https://opensource.org/licenses/mit-license.php'
+                distribution 'repo'
+            }
+        }
+
+        developers {
+            developer {
+                id 'dvg4000'
+                name 'Dmitry Grishechkin'
+                email 'dvgrishechkin@yandex.ru'
+            }
+        }
+    }
+}
+
+nexus {
+    sign = true
+    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
+}
