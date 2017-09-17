@@ -40,6 +40,9 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
         if(isNetworkConnectionAvailable() == true){
             fetchLatestEventData()
+            animationView.setAnimation("checked_done.json");
+            animationView.loop(false);
+            animationView.playAnimation();
         }
         else if(savedInstanceState != null ){
             //fetch old data
