@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.containerFrame, HomeFragment())
+                .add(R.id.containerFrame, HomeFragment.newInstance())
                 .commit()
 
         goFullScreen()

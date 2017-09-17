@@ -1,40 +1,66 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    app:statusBarBackground="@null"
-    tools:context="org.effervescence.app17.fragments.HomeFragment">
+    app:statusBarBackground="@null">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/extended_appbar_height"
+        android:layout_height="100dp"
         android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+        <!--<android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:fitsSystemWindows="true"
-            android:minHeight="?actionBarSize"
+            android:minHeight="100dp"
             app:contentScrim="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
 
-            <include layout="@layout/animated_appbar" />
+            <!--<include layout="@layout/animated_appbar" />-->
+            <ImageView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/header_anim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"
+                android:adjustViewBounds="true"
+                android:fitsSystemWindows="true"
+                android:paddingBottom="@dimen/spacing_large"
+                android:scaleType="fitEnd"
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@color/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
+
+            <!--<android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_gravity="bottom"
                 app:contentInsetStart="@dimen/padding_normal"
-                android:paddingEnd="@dimen/my_io_toolbar_avatar_margin"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/Base.ThemeOverlay.AppCompat">
+                app:popupTheme="@style/Base.ThemeOverlay.AppCompat">-->
 
                 <TextView
                     android:id="@+id/toolbar_title"
@@ -48,24 +74,77 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ViewSwitcher
-        android:id="@+id/loading_switcher"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@android:id/list"
-            android:layout_width="@dimen/main_content_width"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal|top"
-            android:background="@color/content_background"
-            android:clipToPadding="false"
-            android:elevation="@dimen/card_elevation"
-            android:paddingBottom="@dimen/spacing_normal"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@drawable/bg2"
+            android:layout_height="wrap_content">
 
-    </ViewSwitcher>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg2"/>
+
+            <!--<android.support.v7.widget.RecyclerView
+                android:id="@+id/upcomingRecyclerView"
+                android:layout_width="@dimen/main_content_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:background="@color/content_background"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="horizontal" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/bookmarksRecyclerView"
+                android:layout_width="@dimen/main_content_width"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|top"
+                android:background="@color/content_background"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/spacing_normal"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical" />-->
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

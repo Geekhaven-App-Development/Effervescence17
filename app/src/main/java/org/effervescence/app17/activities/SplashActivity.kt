@@ -1,29 +1,21 @@
 package org.effervescence.app17.activities
 
+import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.content.Context
+import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.airbnb.lottie.LottieAnimationView
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
-import org.effervescence.app17.utils.EventDB
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.info
-import org.jetbrains.anko.uiThread
-import android.net.NetworkInfo
-import android.content.Context.CONNECTIVITY_SERVICE
-import android.net.ConnectivityManager
-import android.content.DialogInterface
-import android.content.SharedPreferences
-import android.util.Log
-import android.view.View
-import com.airbnb.lottie.LottieAnimationView
-import android.animation.ValueAnimator
+import org.effervescence.app17.utils.AppDB
+import org.jetbrains.anko.*
+
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
 
@@ -38,15 +30,15 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         //animator.addUpdateListener { animation -> animationView.setProgress(animation.animatedValue) }   //error
         //animator.start()
 
-        if(isNetworkConnectionAvailable() == true){
-            fetchLatestEventData()
-        }
-        else if(savedInstanceState != null ){
-            //fetch old data
-        }
-        else {
-            animationView.cancelAnimation()
-            showAlert()
+        when {
+            isNetworkConnectionAvailable() -> fetchLatestEventData()
+            savedInstanceState != null -> {
+                //fetch old data
+            }
+            else -> {
+                animationView.cancelAnimation()
+                showAlert()
+            }
         }
     }
 
@@ -54,7 +46,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         doAsync {
             val client = OkHttpClient()
             val request = Request.Builder()
-                    .url("https://api.myjson.com/bins/942p1")
+                    .url("https://effervescence-iiita.github.io/Effervescence17/data/events.json")
                     .build()
             val response = client.newCall(request).execute()
             if(response.isSuccessful) {
@@ -63,40 +55,39 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                         .adapter<Array<Event>>(Array<Event>::class.java)
                         .fromJson(response.body()?.string())
 
-                val eventDB = EventDB.getInstance(this@SplashActivity)
+                val eventDB = AppDB.getInstance(this@SplashActivity)
                 eventDB.storeEvents(events = list.toList())
 
                 uiThread {
                     // indicate download done
                     info(eventDB.getAllEvents())
-
+                    startActivity<MainActivity>()
                 }
             }
         }
     }
 
-    fun showAlert() {
+    private fun showAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("No internet Connection")
         builder.setMessage("Please turn on internet connection to continue")
-        builder.setNegativeButton("close") { dialog, which -> finish() }
+        builder.setNegativeButton("close") { _, _ -> finish() }
         val alertDialog = builder.create()
         alertDialog.show()
     }
 
-    fun isNetworkConnectionAvailable(): Boolean {
+    private fun isNetworkConnectionAvailable(): Boolean {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         val activeNetwork = cm.activeNetworkInfo
         val isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting
-        if (isConnected) {
-            Log.d("Network", "Connected")
-            return true
+        return if (isConnected) {
+            debug("Network Connected")
+            true
         }
         else {
-            //showAlert()
-            Log.d("Network", "Not Connected")
-            return false
+            debug("Network not Connected")
+            false
         }
     }
 
