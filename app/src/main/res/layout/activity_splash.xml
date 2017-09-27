@@ -4,6 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="org.effervescence.app17.activities.SplashActivity">
+
+    <ImageView
+        android:id="@+id/iv_effe_logo"
+        android:layout_width="wrap_content"
+        android:contentDescription="@string/effervescence17"
+        android:layout_height="123dp"
+        android:src="@drawable/effe_logo"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_effe_logo"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="check.json"
+        app:lottie_loop="true"
+        />
+
+
 
 </android.support.constraint.ConstraintLayout>

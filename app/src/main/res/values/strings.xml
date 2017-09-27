@@ -7,5 +7,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_effervescence">Effervesence 17</string>
+
     <string name="title_info">Info</string>
+    <string name="effervescence17">Effervescence17</string>
+
 </resources>
