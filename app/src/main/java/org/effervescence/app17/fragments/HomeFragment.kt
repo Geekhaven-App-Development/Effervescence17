@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         view.bookmarksRecyclerView.adapter = bookmarksAdapter
         upcomingAdapter.addEvents(appDB.getAllEvents())
 
-        repeat(100,{ bookmarksAdapter.addEvents(appDB.getAllEvents())})
-        repeat(100,{ upcomingAdapter.addEvents(appDB.getAllEvents())})
+        repeat(2,{ bookmarksAdapter.addEvents(appDB.getAllEvents())})
+        repeat(2,{ upcomingAdapter.addEvents(appDB.getAllEvents())})
     }
 }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ramotion.garlandview.TailLayoutManager
-import com.ramotion.garlandview.TailRecyclerView
 import com.ramotion.garlandview.TailSnapHelper
 import com.ramotion.garlandview.header.HeaderTransformer
 import kotlinx.android.synthetic.main.fragment_days.*
