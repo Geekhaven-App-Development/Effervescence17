@@ -3,15 +3,11 @@ package org.effervescence.app17.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.animated_appbar.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-
 import org.effervescence.app17.R
 import org.effervescence.app17.adapters.BookmarksAdapter
 import org.effervescence.app17.adapters.UpcomingAdapter
@@ -42,7 +38,7 @@ class HomeFragment : Fragment() {
         //view.header_anim.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.bg2))
         //(activity as AppCompatActivity).setSupportActionBar(view.toolbar)
 
-        /*view.upcomingRecyclerView.layoutManager = LinearLayoutManager(context,
+        view.upcomingRecyclerView.layoutManager = LinearLayoutManager(context,
                 LinearLayoutManager.HORIZONTAL, false)
 
         val layoutManager = LinearLayoutManager(context)
@@ -53,12 +49,12 @@ class HomeFragment : Fragment() {
 
         val appDB = AppDB.getInstance(context)
         val upcomingAdapter = UpcomingAdapter(context)
-        val bookmarksAdpater = BookmarksAdapter(context)
+        val bookmarksAdapter = BookmarksAdapter(context)
         view.upcomingRecyclerView.adapter = upcomingAdapter
-        view.bookmarksRecyclerView.adapter = bookmarksAdpater
+        view.bookmarksRecyclerView.adapter = bookmarksAdapter
         upcomingAdapter.addEvents(appDB.getAllEvents())
 
-        repeat(100,{ bookmarksAdpater.addEvents(appDB.getAllEvents())})
-        repeat(100,{ upcomingAdapter.addEvents(appDB.getAllEvents())})*/
+        repeat(100,{ bookmarksAdapter.addEvents(appDB.getAllEvents())})
+        repeat(100,{ upcomingAdapter.addEvents(appDB.getAllEvents())})
     }
 }
