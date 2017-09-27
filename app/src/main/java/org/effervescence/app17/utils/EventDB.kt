@@ -27,5 +27,9 @@ class EventDB private constructor(context: Context) {
         it.categories.contains(category)
     }
 
+    fun getEventsOfDay(day: Int) = hash.getAllValues<Event>().filter {
+        it.days.contains(day)
+    }
+
     fun storeEvents(events: List<Event>) = events.forEach { hash.put(it.id,it) }
 }
