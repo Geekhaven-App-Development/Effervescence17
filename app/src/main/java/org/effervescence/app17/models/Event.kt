@@ -12,6 +12,7 @@ data class Event(
         val location: String = "",
         val timestamp: Long = 0,
         val imageUrl: String = "",
+        val days : List<Int> = emptyList(),
         val categories: List<String> = emptyList(),
         val additionalInfo: List<String> = emptyList(),
         val facebookEventLink: String = "",
