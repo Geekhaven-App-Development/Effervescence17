@@ -79,14 +79,8 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                                 startActivity<MainActivity>()
                                 finish()
                             },
-                            onCancel = { /*postUpdatePlayButtonText()*/ },
-                            onRepeat =  {
-                                /*animationView.performanceTracker?.logRenderTimes()
-                                animationView.performanceTracker?.clearRenderTimes()
-                                recordDroppedFrames()
-                                startRecordingDroppedFrames()*/
-                            }
-                    ))
+                            onCancel = { },
+                            onRepeat =  { }))
                 }
             }
         }

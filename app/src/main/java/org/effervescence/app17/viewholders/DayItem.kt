@@ -16,14 +16,13 @@ class DayItem(itemView: View, pool: RecyclerView.RecycledViewPool) : HeaderItem(
     private val mHeader: View = null!!
     private val mHeaderAlpha: View = null!!
 
-    private val mRecyclerView: InnerRecyclerView
+    private val mRecyclerView: InnerRecyclerView = itemView.findViewById<View>(R.id.recycler_view) as InnerRecyclerView
 
     private var mIsScrolling: Boolean = false
 
 
     init {
         // Init RecyclerView
-        mRecyclerView = itemView.findViewById<View>(R.id.recycler_view) as InnerRecyclerView
         mRecyclerView.recycledViewPool = pool
         mRecyclerView.adapter = InnerDataAdapter()
 

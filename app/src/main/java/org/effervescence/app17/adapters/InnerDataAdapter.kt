@@ -1,7 +1,8 @@
 package org.effervescence.app17.main.inner
 
 import android.view.ViewGroup
-import org.effervescence.app17.utils.EventData
+import org.effervescence.app17.models.Event
+import org.effervescence.app17.viewholders.EventItem
 
 
 import java.util.ArrayList
@@ -9,7 +10,7 @@ import java.util.ArrayList
 
 class InnerDataAdapter : com.ramotion.garlandview.inner.InnerAdapter<EventItem>() {
 
-    private val mData = ArrayList<EventData>()
+    private val mData = ArrayList<Event>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventItem? {
         return null
@@ -23,7 +24,7 @@ class InnerDataAdapter : com.ramotion.garlandview.inner.InnerAdapter<EventItem>(
         return mData.size
     }
 
-    fun addData(innerDataList: List<EventData>) {
+    fun addData(innerDataList: List<Event>) {
         val size = mData.size
         mData.addAll(innerDataList)
         notifyItemRangeInserted(size, innerDataList.size)

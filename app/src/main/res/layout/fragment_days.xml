@@ -3,11 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <com.ramotion.garlandview.TailRecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_daysview">
+        android:id="@+id/daysRecyclerView">
 
-    </android.support.v7.widget.RecyclerView>
+    </com.ramotion.garlandview.TailRecyclerView>
 
 </LinearLayout>

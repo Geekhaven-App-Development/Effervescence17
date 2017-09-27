@@ -9,9 +9,11 @@ import com.ramotion.garlandview.TailLayoutManager
 import com.ramotion.garlandview.TailRecyclerView
 import com.ramotion.garlandview.TailSnapHelper
 import com.ramotion.garlandview.header.HeaderTransformer
+import kotlinx.android.synthetic.main.fragment_days.*
 import org.effervescence.app17.R
 import org.effervescence.app17.adapters.OuterDaysAdapter
-import org.effervescence.app17.utils.EventData
+import org.effervescence.app17.models.Event
+import org.effervescence.app17.utils.AppDB
 
 
 class DaysViewFragment : Fragment() {
@@ -19,21 +21,29 @@ class DaysViewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        val v = inflater.inflate(R.layout.fragment_days, container, false)
-
-        // initRecyclerView(null, v)
-        // Inflate the layout for this fragment
-        return v
+        return inflater.inflate(R.layout.fragment_days, container, false)
     }
 
-    private fun initRecyclerView(data: List<List<EventData>>, v: View) {
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val rv = v.findViewById<View>(R.id.recycler_view) as TailRecyclerView
-        rv.layoutManager = TailLayoutManager(context).setPageTransformer(HeaderTransformer())
-        rv.adapter = OuterDaysAdapter(data)
+        val appDB = AppDB.getInstance(context)
+        val eventData = ArrayList<List<Event>>()
 
-        TailSnapHelper().attachToRecyclerView(rv)
+        //TODO: Apply correct logic
+        eventData.add(appDB.getAllEvents())
+        eventData.add(appDB.getAllEvents())
+        eventData.add(appDB.getAllEvents())
+
+        initRecyclerView(eventData)
+    }
+
+    private fun initRecyclerView(data: List<List<Event>>) {
+
+        daysRecyclerView.layoutManager = TailLayoutManager(context).setPageTransformer(HeaderTransformer())
+        daysRecyclerView.adapter = OuterDaysAdapter(data)
+
+        TailSnapHelper().attachToRecyclerView(daysRecyclerView)
     }
 
 

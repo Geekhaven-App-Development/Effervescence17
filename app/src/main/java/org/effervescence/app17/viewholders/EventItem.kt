@@ -1,13 +1,14 @@
-package org.effervescence.app17.main.inner
+package org.effervescence.app17.viewholders
 
 
 import android.view.View
 import android.view.ViewGroup
-import org.effervescence.app17.utils.EventData
+import com.ramotion.garlandview.inner.InnerItem
+import org.effervescence.app17.models.Event
 
-class EventItem(itemView: View) : com.ramotion.garlandview.inner.InnerItem(itemView) {
+class EventItem(itemView: View) : InnerItem(itemView) {
 
-    private val mEventLayout: View
+    private val mEventLayout: View = (itemView as ViewGroup).getChildAt(0)
 
     /*public final TextView mHeader;
     public final TextView mName;
@@ -16,18 +17,13 @@ class EventItem(itemView: View) : com.ramotion.garlandview.inner.InnerItem(itemV
     public final View mAvatarBorder;
     public final View mLine;*/
 
-    var itemData: EventData? = null
-        private set
-
-    init {
-        mEventLayout = (itemView as ViewGroup).getChildAt(0)
-    }
+    private var itemData: Event? = null
 
     override fun getInnerLayout(): View {
         return mEventLayout
     }
 
-    internal fun setContent(data: EventData) {
+    internal fun setContent(data: Event) {
         itemData = data
 
     }
