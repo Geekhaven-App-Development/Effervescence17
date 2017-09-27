@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import org.effervescence.app17.R
+import org.effervescence.app17.fragments.DaysViewFragment
 import org.effervescence.app17.fragments.HomeFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,12 +15,17 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
+                switchFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
+            R.id.navigation_schedule -> {
+                switchFragment(DaysViewFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_info -> {
                 return@OnNavigationItemSelectedListener true
             }
         }

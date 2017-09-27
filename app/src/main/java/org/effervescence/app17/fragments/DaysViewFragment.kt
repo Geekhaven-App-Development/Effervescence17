@@ -12,7 +12,6 @@ import com.ramotion.garlandview.header.HeaderTransformer
 import org.effervescence.app17.R
 import org.effervescence.app17.adapters.OuterDaysAdapter
 import org.effervescence.app17.utils.EventData
-import org.effervescence.app17.utils.EventDB
 
 
 class DaysViewFragment : Fragment() {
