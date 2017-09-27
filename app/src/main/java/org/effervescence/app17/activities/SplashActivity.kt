@@ -9,10 +9,12 @@ import android.os.Bundle
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.utils.AnimatorListenerAdapter
 import org.effervescence.app17.utils.AppDB
 import org.jetbrains.anko.*
 
@@ -24,14 +26,20 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_splash)
 
         // Custom animation speed or duration.
-        val animationView = findViewById<View>(R.id.animation_view) as LottieAnimationView
         val animator = ValueAnimator.ofFloat(0f, 1f)
                 .setDuration(500)
         //animator.addUpdateListener { animation -> animationView.setProgress(animation.animatedValue) }   //error
         //animator.start()
 
+        animationView.setAnimation("loading_spinner.json")
+        animationView.scale = 0.1f
+        animationView.playAnimation()
+        animationView.loop(true)
+
         when {
-            isNetworkConnectionAvailable() -> fetchLatestEventData()
+            isNetworkConnectionAvailable() -> {
+                fetchLatestEventData()
+            }
             savedInstanceState != null -> {
                 //fetch old data
             }
@@ -61,7 +69,24 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 uiThread {
                     // indicate download done
                     info(eventDB.getAllEvents())
-                    startActivity<MainActivity>()
+
+                    animationView.setAnimation("checked_done.json")
+                    animationView.loop(false)
+                    animationView.playAnimation()
+                    animationView.addAnimatorListener(AnimatorListenerAdapter(
+                            onStart = {  },
+                            onEnd = {
+                                startActivity<MainActivity>()
+                                finish()
+                            },
+                            onCancel = { /*postUpdatePlayButtonText()*/ },
+                            onRepeat =  {
+                                /*animationView.performanceTracker?.logRenderTimes()
+                                animationView.performanceTracker?.clearRenderTimes()
+                                recordDroppedFrames()
+                                startRecordingDroppedFrames()*/
+                            }
+                    ))
                 }
             }
         }

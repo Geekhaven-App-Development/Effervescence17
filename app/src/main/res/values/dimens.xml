@@ -35,7 +35,8 @@
     <integer name="reserve_inset_edge">0x50</integer> <!-- bottom -->
     <dimen name="my_schedule_page_margin">8dp</dimen>
     <dimen name="my_schedule_icon_size">24dp</dimen>
-    <dimen name="my_schedule_icon_horizontal_padding">24dp</dimen> <!-- center 24dp in @keyline_2 -->
+    <dimen name="my_schedule_icon_horizontal_padding">24dp
+    </dimen> <!-- center 24dp in @keyline_2 -->
     <dimen name="widget_schedule_header_height">40dp</dimen>
     <dimen name="drawer_width">@dimen/match_parent</dimen>
     <dimen name="horizontal_scrollbar_height">4dp</dimen>
@@ -126,4 +127,6 @@
     <dimen name="event_button_margin">4dp</dimen>
     <dimen name="settings_content_padding">32dp</dimen>
     <dimen name="fab_margin">25dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

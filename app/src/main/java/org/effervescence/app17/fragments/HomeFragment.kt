@@ -13,8 +13,9 @@ import org.effervescence.app17.adapters.BookmarksAdapter
 import org.effervescence.app17.adapters.UpcomingAdapter
 import org.effervescence.app17.utils.AppDB
 
-
-// Created by @betterclever
+/**
+ * Created by betterclever on 16/09/17.
+ */
 
 class HomeFragment : Fragment() {
 
