@@ -30,10 +30,8 @@ class DaysViewFragment : Fragment() {
         val appDB = AppDB.getInstance(context)
         val eventData = ArrayList<List<Event>>()
 
-        //TODO: Apply correct logic
-        eventData.add(appDB.getAllEvents())
-        eventData.add(appDB.getAllEvents())
-        eventData.add(appDB.getAllEvents())
+        val eList : Event = Event()
+        eList.categories.mapTo(eventData) { appDB.getEventsOfCategory(it) }
 
         initRecyclerView(eventData)
     }

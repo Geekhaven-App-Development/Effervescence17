@@ -19,8 +19,6 @@ class InnerDataAdapter : com.ramotion.garlandview.inner.InnerAdapter<EventItem>(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventItem? {
         val view = LayoutInflater.from(parent.context).
                 inflate(R.layout.card_event, parent, false)
-        Log.d("ADAPTER", "inner")
-
         return EventItem(view)
     }
 

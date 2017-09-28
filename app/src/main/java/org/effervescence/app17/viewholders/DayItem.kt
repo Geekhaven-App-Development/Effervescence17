@@ -2,7 +2,6 @@ package org.effervescence.app17.viewholders
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
 import com.ramotion.garlandview.header.HeaderItem
 import com.ramotion.garlandview.inner.InnerRecyclerView
 import org.effervescence.app17.R
@@ -26,15 +25,9 @@ class DayItem(itemView: View, pool: RecyclerView.RecycledViewPool) : HeaderItem(
     private val adapter = InnerDataAdapter()
 
     init {
-
-
         // Init RecyclerView
         mRecyclerView.recycledViewPool = pool
-
         mRecyclerView.adapter = adapter
-        
-
-
     }
 
     override fun isScrolling(): Boolean {

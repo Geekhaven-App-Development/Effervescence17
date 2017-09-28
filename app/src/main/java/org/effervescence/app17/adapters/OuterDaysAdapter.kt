@@ -25,10 +25,8 @@ class OuterDaysAdapter(private val mData: List<List<Event>>) : TailAdapter<DayIt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayItem {
-        /// TODO: INFLATE CORRECT VIEW HERE
         val view = LayoutInflater.from(parent.context).
                 inflate(R.layout.layout_daysview, parent, false)
-        Log.d("ADAPTER", "outer")
         val item = DayItem(view,mPool)
         return item
     }
