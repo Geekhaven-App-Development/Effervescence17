@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Effervescence\'17</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_schedule">Schedule</string>
     <string name="title_notifications">Notifications</string>
 
     <!-- TODO: Remove or change this placeholder text -->

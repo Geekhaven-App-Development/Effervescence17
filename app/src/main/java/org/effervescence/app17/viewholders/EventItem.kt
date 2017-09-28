@@ -25,7 +25,6 @@ class EventItem(itemView: View) : InnerItem(itemView) {
 
     internal fun setContent(data: Event) {
         itemData = data
-
     }
 
 }

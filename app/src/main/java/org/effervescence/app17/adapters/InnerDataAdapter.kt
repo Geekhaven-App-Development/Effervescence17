@@ -1,7 +1,11 @@
 package org.effervescence.app17.main.inner
 
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.viewholders.DayItem
 import org.effervescence.app17.viewholders.EventItem
 
 
@@ -13,7 +17,11 @@ class InnerDataAdapter : com.ramotion.garlandview.inner.InnerAdapter<EventItem>(
     private val mData = ArrayList<Event>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventItem? {
-        return null
+        val view = LayoutInflater.from(parent.context).
+                inflate(R.layout.card_event, parent, false)
+        Log.d("ADAPTER", "inner")
+
+        return EventItem(view)
     }
 
     override fun onBindViewHolder(holder: EventItem, position: Int) {
