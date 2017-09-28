@@ -23,13 +23,17 @@ class DayItem(itemView: View, pool: RecyclerView.RecycledViewPool) : HeaderItem(
     private var mIsScrolling: Boolean = false
 
     private var dayData: List<Event>? = null
+    private val adapter = InnerDataAdapter()
 
     init {
 
 
         // Init RecyclerView
         mRecyclerView.recycledViewPool = pool
-        mRecyclerView.adapter = InnerDataAdapter()
+
+        mRecyclerView.adapter = adapter
+        
+
 
     }
 
@@ -51,6 +55,7 @@ class DayItem(itemView: View, pool: RecyclerView.RecycledViewPool) : HeaderItem(
 
     internal fun setContent(data: List<Event>) {
         dayData = data
+        adapter.addData(dayData!!)
     }
 
 }

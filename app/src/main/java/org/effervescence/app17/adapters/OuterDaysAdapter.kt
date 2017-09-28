@@ -29,7 +29,8 @@ class OuterDaysAdapter(private val mData: List<List<Event>>) : TailAdapter<DayIt
         val view = LayoutInflater.from(parent.context).
                 inflate(R.layout.layout_daysview, parent, false)
         Log.d("ADAPTER", "outer")
-        return DayItem(view, mPool)
+        val item = DayItem(view,mPool)
+        return item
     }
 
     override fun onBindViewHolder(holder: DayItem, position: Int) {
