@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.airbnb.lottie.LottieAnimationView
 import com.squareup.moshi.Moshi
@@ -14,9 +15,12 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.utils.AnimatorListenerAdapter
 import org.effervescence.app17.utils.AppDB
+import org.effervescence.app17.utils.SponsorDB
 import org.jetbrains.anko.*
+import java.util.*
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
@@ -65,6 +69,18 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
                 val eventDB = AppDB.getInstance(this@SplashActivity)
                 eventDB.storeEvents(events = list.toList())
+                val request2 = Request.Builder()
+                        .url("https://effervescence-iiita.github.io/Effervescence17/data/sponsors.json")
+                        .build()
+                val response2 = client.newCall(request2).execute()
+                if(response2.isSuccessful) {
+                    val list2 = Moshi.Builder().build()
+                            .adapter<Array<Sponsor>>(Array<Sponsor>::class.java)
+                            .fromJson(response2.body()?.string())
+                    var sponsors2 = list2.toList()
+                    val sponsorDB = SponsorDB.getInstance(this@SplashActivity)
+                    sponsorDB.storeSponsors(sponsors2)
+                }
 
                 uiThread {
                     // indicate download done
