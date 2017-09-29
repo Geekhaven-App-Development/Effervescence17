@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
+                // Temporary: FIX IT
+                switchFragment(SponsorFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_info -> {

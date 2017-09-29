@@ -15,7 +15,7 @@ import org.effervescence.app17.models.Sponsor
 /**
  * Created by akshat on 28/9/17.
  */
-class SponsorsAdapter(val sponsorsList: List<Sponsor>, val context: Context) : RecyclerView.Adapter<SponsorsAdapter.ViewHolder>() {
+class SponsorsAdapter(private val sponsorsList: List<Sponsor>, val context: Context) : RecyclerView.Adapter<SponsorsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.sponsor_container,parent,false)
@@ -23,19 +23,7 @@ class SponsorsAdapter(val sponsorsList: List<Sponsor>, val context: Context) : R
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var i = 0
-        holder.name.text = sponsorsList[position].name
-        var allCategories = ""
-        while( i < sponsorsList[position].categories.size){
-            if (allCategories.equals("")){
-                allCategories += sponsorsList[position].categories[i]
-            }
-            else {
-                allCategories += ", " + sponsorsList[position].categories[i]
-            }
-            i++
-        }
-        holder.category.text = allCategories
+        holder.bindItem(sponsorsList[position])
         //Picasso.with(context).load(sponsorsList[position].imageUrl).into(holder.image)
     }
 
@@ -44,13 +32,11 @@ class SponsorsAdapter(val sponsorsList: List<Sponsor>, val context: Context) : R
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        var category: TextView
-        var name: TextView
-        var image: ImageView
-        init {
-            category = view.sponsor_category
-            name = view.sponsor_name
-            image = view.sponsor_image
+
+        fun bindItem(sponsor: Sponsor) {
+            itemView.sponsor_category.text = sponsor.categories.joinToString(",")
+            itemView.sponsor_name.text = sponsor.name
+            Picasso.with(context).load(sponsor.imageUrl).into(itemView.sponsor_image)
         }
     }
 

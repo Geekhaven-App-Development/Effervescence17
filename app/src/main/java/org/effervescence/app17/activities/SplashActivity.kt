@@ -1,14 +1,11 @@
 package org.effervescence.app17.activities
 
-import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import com.airbnb.lottie.LottieAnimationView
+import com.esotericsoftware.minlog.Log.debug
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
@@ -19,20 +16,13 @@ import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.utils.AnimatorListenerAdapter
 import org.effervescence.app17.utils.AppDB
 import org.jetbrains.anko.*
-import java.util.*
 
 
 class SplashActivity : AppCompatActivity(), AnkoLogger {
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        // Custom animation speed or duration.
-        val animator = ValueAnimator.ofFloat(0f, 1f)
-                .setDuration(500)
-        //animator.addUpdateListener { animation -> animationView.setProgress(animation.animatedValue) }   //error
-        //animator.start()
 
         animationView.setAnimation("loading_spinner.json")
         animationView.scale = 0.1f
@@ -41,7 +31,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
 
         when {
             isNetworkConnectionAvailable() -> {
-                fetchLatestEventData()
+                fetchLatestData()
             }
             savedInstanceState != null -> {
                 //fetch old data
@@ -53,53 +43,51 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    private fun fetchLatestEventData(){
+    private fun fetchLatestData() {
         doAsync {
             val client = OkHttpClient()
             val request = Request.Builder()
                     .url("https://effervescence-iiita.github.io/Effervescence17/data/events.json")
                     .build()
             val response = client.newCall(request).execute()
-            if(response.isSuccessful) {
-               val list = Moshi.Builder()
+            if (response.isSuccessful) {
+                val list = Moshi.Builder()
                         .build()
                         .adapter<Array<Event>>(Array<Event>::class.java)
                         .fromJson(response.body()?.string())
 
                 val eventDB = AppDB.getInstance(this@SplashActivity)
                 eventDB.storeEvents(events = list.toList())
-                val request2 = Request.Builder()
-                        .url("https://effervescence-iiita.github.io/Effervescence17/data/sponsors.json")
-                        .build()
-                val response2 = client.newCall(request2).execute()
-                if(response2.isSuccessful) {
-                    val list2 = Moshi.Builder().build()
-                            .adapter<Array<Sponsor>>(Array<Sponsor>::class.java)
-                            .fromJson(response2.body()?.string())
-                    var sponsors2 = list2.toList()
-                    val sponsorDB = AppDB.getInstance(this@SplashActivity)
-                    sponsorDB.storeSponsors(sponsors2)
-                }
+            }
 
-                uiThread {
-                    // indicate download done
-                    info(eventDB.getAllEvents())
+            val request2 = Request.Builder()
+                    .url("https://effervescence-iiita.github.io/Effervescence17/data/sponsors.json")
+                    .build()
+            val response2 = client.newCall(request2).execute()
+            if (response2.isSuccessful) {
+                val arrayOfSponsors = Moshi.Builder().build()
+                        .adapter<Array<Sponsor>>(Array<Sponsor>::class.java)
+                        .fromJson(response2.body()?.string())
+                val sponsorDB = AppDB.getInstance(this@SplashActivity)
+                sponsorDB.storeSponsors(arrayOfSponsors.toList())
+            }
 
-                    animationView.setAnimation("checked_done.json")
-                    animationView.loop(false)
-                    animationView.playAnimation()
-                    animationView.addAnimatorListener(AnimatorListenerAdapter(
-                            onStart = {  },
-                            onEnd = {
-                                startActivity<MainActivity>()
-                                finish()
-                            },
-                            onCancel = { },
-                            onRepeat =  { }))
-                }
+            uiThread {
+                animationView.setAnimation("checked_done.json")
+                animationView.loop(false)
+                animationView.playAnimation()
+                animationView.addAnimatorListener(AnimatorListenerAdapter(
+                        onStart = { },
+                        onEnd = {
+                            startActivity<MainActivity>()
+                            finish()
+                        },
+                        onCancel = { },
+                        onRepeat = { }))
             }
         }
     }
+
 
     private fun showAlert() {
         val builder = AlertDialog.Builder(this)
@@ -118,8 +106,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         return if (isConnected) {
             debug("Network Connected")
             true
-        }
-        else {
+        } else {
             debug("Network not Connected")
             false
         }
