@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_sponsors.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.adapters.SponsorsAdapter
 import org.effervescence.app17.models.Sponsor
-import org.effervescence.app17.utils.SponsorDB
+import org.effervescence.app17.utils.AppDB
 import java.util.*
 
 /**
@@ -26,7 +26,7 @@ class SponsorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sponsorDB = SponsorDB.getInstance(activity)
+        val sponsorDB = AppDB.getInstance(activity)
         var sponsors = sponsorDB.getAllSponsors()
         Collections.sort(sponsors, { a1: Sponsor, a2: Sponsor -> a1.priority - a2.priority })
 

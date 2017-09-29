@@ -18,7 +18,6 @@ import org.effervescence.app17.models.Event
 import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.utils.AnimatorListenerAdapter
 import org.effervescence.app17.utils.AppDB
-import org.effervescence.app17.utils.SponsorDB
 import org.jetbrains.anko.*
 import java.util.*
 
@@ -78,7 +77,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                             .adapter<Array<Sponsor>>(Array<Sponsor>::class.java)
                             .fromJson(response2.body()?.string())
                     var sponsors2 = list2.toList()
-                    val sponsorDB = SponsorDB.getInstance(this@SplashActivity)
+                    val sponsorDB = AppDB.getInstance(this@SplashActivity)
                     sponsorDB.storeSponsors(sponsors2)
                 }
 
