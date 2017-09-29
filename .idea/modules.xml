@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Effervescence17.iml" filepath="$PROJECT_DIR$/Effervescence17.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Effervescence17.iml" filepath="$PROJECT_DIR$/Effervescence17.iml" />
       <module fileurl="file://$PROJECT_DIR$/Effervescene17.iml" filepath="$PROJECT_DIR$/Effervescene17.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/garland-view/garland-view.iml" filepath="$PROJECT_DIR$/garland-view/garland-view.iml" />
       <module fileurl="file://$PROJECT_DIR$/garland-view/garland-view.iml" filepath="$PROJECT_DIR$/garland-view/garland-view.iml" />
     </modules>
   </component>

@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.effervescence.app17.R
 import org.effervescence.app17.fragments.DaysViewFragment
 import org.effervescence.app17.fragments.HomeFragment
+import org.effervescence.app17.fragments.SponsorFragment
 
 class MainActivity : AppCompatActivity() {
 
