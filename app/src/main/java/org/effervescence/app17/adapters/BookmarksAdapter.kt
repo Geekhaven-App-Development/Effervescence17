@@ -5,13 +5,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.upcoming_event_layout.view.*
+import kotlinx.android.synthetic.main.bookmark_event_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import java.util.*
 
 /**
  * Created by betterclever on 17/09/17.
  */
+
 class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAdapter.ViewHolder>() {
 
     private val events = ArrayList<Event>()
@@ -34,6 +36,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(event: Event) {
             itemView.eventNameTV.text = event.name
+            itemView.eventTime.text = Date(event.timestamp).toString().substring(4,16)
             // TODO: Set image Glide
         }
     }
