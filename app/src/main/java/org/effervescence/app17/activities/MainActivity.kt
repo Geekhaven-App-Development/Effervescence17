@@ -16,11 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                var homeFragment = android.app.Fragment.instantiate(this@MainActivity,
-                        SponsorFragment::class.java!!.getName()) as SponsorFragment
-
-                fragmentManager.beginTransaction().replace(R.id.containerFrame, homeFragment).commit()
-                //switchFragment(HomeFragment())
+                switchFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_schedule -> {
