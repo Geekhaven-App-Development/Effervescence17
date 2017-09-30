@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF"
     tools:context="org.effervescence.app17.activities.SplashActivity">
 
@@ -16,7 +16,6 @@
         android:contentDescription="@string/effervescence17"
         android:src="@drawable/effe_logo" />
 
-
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
@@ -24,9 +23,6 @@
         android:layout_marginTop="50dp"
         android:maxHeight="200dp"
         android:layout_marginBottom="8dp"
-        android:layout_below="@id/effeLogoIV"
-        app:lottie_scale="3"/>
-
-
+        android:layout_below="@id/effeLogoIV"/>
 
 </RelativeLayout>

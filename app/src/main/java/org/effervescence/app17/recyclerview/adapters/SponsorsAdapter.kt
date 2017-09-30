@@ -1,12 +1,10 @@
-package org.effervescence.app17.adapters
+package org.effervescence.app17.recyclerview.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.sponsor_container.view.*
 import org.effervescence.app17.R

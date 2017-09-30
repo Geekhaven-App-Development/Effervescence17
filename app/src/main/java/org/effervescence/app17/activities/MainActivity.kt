@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_info -> {
+
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.containerFrame, HomeFragment.newInstance())
                 .commit()
 
-        goFullScreen()
+        //goFullScreen()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 

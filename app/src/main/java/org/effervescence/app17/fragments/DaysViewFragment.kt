@@ -2,6 +2,7 @@ package org.effervescence.app17.fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,7 @@ import com.ramotion.garlandview.TailSnapHelper
 import com.ramotion.garlandview.header.HeaderTransformer
 import kotlinx.android.synthetic.main.fragment_days.*
 import org.effervescence.app17.R
-import org.effervescence.app17.adapters.OuterDaysAdapter
+import org.effervescence.app17.recyclerview.adapters.GarlandOuterAdapter
 import org.effervescence.app17.models.Event
 import org.effervescence.app17.utils.AppDB
 
@@ -30,9 +31,11 @@ class DaysViewFragment : Fragment() {
         val eventData = ArrayList<List<Event>>()
 
         //TODO: Apply correct logic
-        eventData.add(appDB.getAllEvents())
-        eventData.add(appDB.getAllEvents())
-        eventData.add(appDB.getAllEvents())
+        eventData.add(appDB.getAllEvents().subList(0,10))
+        eventData.add(appDB.getAllEvents().subList(10,20))
+        eventData.add(appDB.getAllEvents().subList(20,30))
+
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         initRecyclerView(eventData)
     }
@@ -40,7 +43,7 @@ class DaysViewFragment : Fragment() {
     private fun initRecyclerView(data: List<List<Event>>) {
 
         daysRecyclerView.layoutManager = TailLayoutManager(context).setPageTransformer(HeaderTransformer())
-        daysRecyclerView.adapter = OuterDaysAdapter(data)
+        daysRecyclerView.adapter = GarlandOuterAdapter(data)
 
         TailSnapHelper().attachToRecyclerView(daysRecyclerView)
     }
