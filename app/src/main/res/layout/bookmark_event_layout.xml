@@ -22,7 +22,7 @@
         android:layout_marginStart="11dp"
         android:layout_marginTop="11dp"
         android:layout_toEndOf="@+id/eventImageView"
-        android:textSize="17sp"
+        android:textSize="20sp"
         android:text="TextView" />
 
     <TextView

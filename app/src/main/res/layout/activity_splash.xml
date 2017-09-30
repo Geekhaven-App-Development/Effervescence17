@@ -4,25 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradient_light_splash"
     tools:context="org.effervescence.app17.activities.SplashActivity">
 
     <ImageView
         android:id="@+id/effeLogoIV"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
         android:contentDescription="@string/effervescence17"
-        android:src="@drawable/effe_logo" />
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:src="@drawable/effe1" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="50dp"
-        android:maxHeight="200dp"
-        android:layout_marginBottom="8dp"
-        android:layout_below="@id/effeLogoIV"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="63dp"
+        android:maxHeight="200dp" />
 
 </RelativeLayout>
