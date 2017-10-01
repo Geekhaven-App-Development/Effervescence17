@@ -1,18 +1,12 @@
 package org.effervescence.app17.recyclerview.viewholders
 
-import android.content.Context
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 
 import com.ramotion.garlandview.header.HeaderDecorator
 import com.ramotion.garlandview.header.HeaderItem
 import com.ramotion.garlandview.inner.InnerLayoutManager
 import com.ramotion.garlandview.inner.InnerRecyclerView
-import kotlinx.android.synthetic.main.event_outer_header.view.*
 import kotlinx.android.synthetic.main.event_outer_item.view.*
 
 import org.effervescence.app17.R
@@ -59,7 +53,7 @@ class EventOuterItem(itemView: View, pool: RecyclerView.RecycledViewPool) : Head
         mMiddleCollapsible.add(mName.parent as View)*/
 
         // Init RecyclerView
-        mRecyclerView = itemView.recycler_view
+        mRecyclerView = itemView.recyclerView
         mRecyclerView.recycledViewPool = pool
 
         val adapter = GarlandInnerAdapter()
@@ -88,7 +82,7 @@ class EventOuterItem(itemView: View, pool: RecyclerView.RecycledViewPool) : Head
     }
 
     override fun getViewGroup(): InnerRecyclerView {
-        return itemView.recycler_view
+        return itemView.recyclerView
     }
 
     override fun getHeader(): View {

@@ -3,66 +3,57 @@ package org.effervescence.app17.activities
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.TypedArray
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.transition.Transition
 import android.util.Pair
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.squareup.picasso.Picasso
 
 
 import java.util.ArrayList
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import org.effervescence.app17.R
+import org.effervescence.app17.utils.AppDB
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
-class EventDetailActivity : AppCompatActivity() {
+class EventDetailActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_event_detail)
 
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val fullName = intent.getStringExtra(BUNDLE_NAME)
-        //val title = fullName.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0] + getString(R.string.profile)
+        info(intent.extras)
+        val extras = intent.extras
 
-        (findViewById<View>(R.id.tv_title) as TextView).text = title
-        (findViewById<View>(R.id.tv_name) as TextView).text = fullName
-        (findViewById<View>(R.id.tv_info) as TextView).text = intent.getStringExtra(BUNDLE_INFO)
-        //(findViewById<View>(R.id.tv_status) as TextView).text = intent.getStringExtra(BUNDLE_STATUS)
+        val eventID = intent.getLongExtra("id",0)
 
-        val recyclerView = findViewById<View>(R.id.recycler_view) as RecyclerView
-        //val listData = intent.getParcelableArrayListExtra<DetailsData>(BUNDLE_LIST_DATA)
-        //recyclerView.adapter = ProfileAdapter(listData)
+        if(eventID != 0L) {
+            val event = AppDB.getInstance(this).getEventByID(eventID)
+            titleTextView.text = event.name
+            descriptionTextView.text = event.description
+            facebookLinkTextView.text = event.facebookEventLink
 
-        Glide.with(this)
-                .load(intent.getStringExtra(BUNDLE_AVATAR_URL))
-                .apply(RequestOptions.bitmapTransform(CropCircleTransformation()))
-                .into(avatar)
-
-        val appBarLayout = findViewById<View>(R.id.app_bar) as AppBarLayout
+            if(event.imageUrl != ""){
+                Picasso.with(this).load(event.imageUrl)
+            }
+        }
 
         appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
 
             internal val headerImage = findViewById<View>(R.id.header_image)
             internal val headerInfo = findViewById<View>(R.id.header_info)
-            internal val avatar = findViewById<View>(R.id.avatar_border)
-            internal val texts = findViewById<View>(R.id.texts) as LinearLayout
+            internal val avatarBorder = findViewById<View>(R.id.avatar_border)
 
             internal val avatarHOffset = resources.getDimensionPixelSize(R.dimen.profile_avatar_h_offset)
             internal val avatarVOffset = resources.getDimensionPixelSize(R.dimen.profile_avatar_v_offset)
@@ -80,8 +71,8 @@ class EventDetailActivity : AppCompatActivity() {
                 toolBarHeight = styledAttributes.getDimension(0, 0f).toInt() + statusBarHeight
                 styledAttributes.recycle()
 
-                avatar.pivotX = 0f
-                avatar.pivotY = 0f
+                avatarBorder.pivotX = 0f
+                avatarBorder.pivotY = 0f
                 texts.pivotX = 0f
                 texts.pivotY = 0f
             }
@@ -100,14 +91,14 @@ class EventDetailActivity : AppCompatActivity() {
                 val totalScrollRange = appBarLayout.totalScrollRange
                 val ratio = (totalScrollRange.toFloat() + verticalOffset) / totalScrollRange
 
-                val avatarHalf = avatar.measuredHeight / 2
+                val avatarHalf = avatar_border.measuredHeight / 2
                 val avatarRightest = appBarLayout.measuredWidth / 2 - avatarHalf - avatarHOffset
                 val avatarTopmost = avatarHalf + avatarVOffset
 
-                avatar.x = avatarHOffset + avatarRightest * ratio
-                avatar.y = avatarVOffset - avatarTopmost * ratio
-                avatar.scaleX = 0.5f + 0.5f * ratio
-                avatar.scaleY = 0.5f + 0.5f * ratio
+                avatar_border.x = avatarHOffset + avatarRightest * ratio
+                avatar_border.y = avatarVOffset - avatarTopmost * ratio
+                avatar_border.scaleX = 0.5f + 0.5f * ratio
+                avatar_border.scaleY = 0.5f + 0.5f * ratio
 
                 if (textStart.isEmpty() && verticalOffset == 0) {
                     (0 until texts.childCount).mapTo(textStart) { texts.getChildAt(it).x }
@@ -133,7 +124,7 @@ class EventDetailActivity : AppCompatActivity() {
                         isStarting = false
 
                         ViewCompat.setTransitionName(findViewById(R.id.header_image), null)
-                        ViewCompat.setTransitionName(findViewById(R.id.recycler_view), null)
+                        ViewCompat.setTransitionName(findViewById(R.id.recyclerView), null)
                     }
                 }
 

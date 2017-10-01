@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/aref_ruqaa</item>
+        <item>@font/comfortaa_light</item>
+        <item>@font/delius</item>
+        <item>@font/hammersmith_one</item>
+        <item>@font/merriweather_bold</item>
+        <item>@font/merriweather_light</item>
+    </array>
+</resources>

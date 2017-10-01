@@ -25,15 +25,17 @@ class AppDB private constructor(context: Context) {
 
     companion object : SingletonHolder<AppDB, Context>(::AppDB)
 
-    fun getAllEvents() = eventHash.getAllValues<Event>()
+    fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
     fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>().filter {
         it.categories.contains(category)
     }
 
+    fun getEventByID(id: Long): Event = eventHash.get<Event>(id)
+
     fun storeEvents(events: List<Event>) = events.forEach { eventHash.put(it.id,it) }
 
-    fun getAllSponsors() = sponsorHash.getAllValues<Sponsor>()
+    fun getAllSponsors(): MutableList<Sponsor> = sponsorHash.getAllValues<Sponsor>()
 
     fun storeSponsors(sponsors: List<Sponsor>) = sponsors.forEach { sponsorHash.put(it.id,it) }
 }

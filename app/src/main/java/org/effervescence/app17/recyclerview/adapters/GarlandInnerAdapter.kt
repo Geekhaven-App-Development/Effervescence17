@@ -1,19 +1,17 @@
 package org.effervescence.app17.recyclerview.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 
 import com.ramotion.garlandview.inner.InnerAdapter
-import com.ramotion.garlandview.inner.InnerItem
-import kotlinx.android.synthetic.main.inner_item.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.recyclerview.viewholders.EventInnerItem
 
 import java.util.ArrayList
 
 
-class GarlandInnerAdapter : InnerAdapter<GarlandInnerAdapter.EventInnerItem>() {
+class GarlandInnerAdapter : InnerAdapter<EventInnerItem>() {
 
     private val mData = ArrayList<Event>()
 
@@ -48,21 +46,4 @@ class GarlandInnerAdapter : InnerAdapter<GarlandInnerAdapter.EventInnerItem>() {
         notifyDataSetChanged()
     }
 
-    inner class EventInnerItem(itemView: View): InnerItem(itemView) {
-        override fun getInnerLayout(): View {
-            return (itemView as ViewGroup).getChildAt(0)
-        }
-
-        fun bindItem(event: Event) {
-            itemView.titleTextView.text = event.name
-            itemView.locationTextView.text = event.location
-            itemView.setOnClickListener({
-
-            })
-        }
-
-        fun clearContent() {
-            // Clear binding
-        }
-    }
 }

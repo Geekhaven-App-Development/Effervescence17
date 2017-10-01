@@ -92,7 +92,7 @@
             app:layout_constraintTop_toTopOf="@+id/avatar_border">
 
             <TextView
-                android:id="@+id/tv_name"
+                android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.8"
@@ -102,7 +102,7 @@
                 android:textSize="@dimen/header_name_text_size"/>
 
             <TextView
-                android:id="@+id/tv_info"
+                android:id="@+id/locationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.5"

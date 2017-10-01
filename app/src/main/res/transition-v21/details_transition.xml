@@ -4,7 +4,7 @@
         <targets>
             <target android:excludeId="@android:id/statusBarBackground" />
             <target android:excludeId="@android:id/navigationBarBackground" />
-            <target android:excludeId="@id/app_bar" />
+            <target android:excludeId="@id/appBarLayout" />
         </targets>
     </autoTransition>
 </transitionSet>
