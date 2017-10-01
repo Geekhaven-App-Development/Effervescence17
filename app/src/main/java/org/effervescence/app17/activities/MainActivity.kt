@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.effervescence.app17.R
 import org.effervescence.app17.fragments.DaysViewFragment
 import org.effervescence.app17.fragments.HomeFragment
+import org.effervescence.app17.fragments.ProShowsFragment
 import org.effervescence.app17.fragments.SponsorFragment
 
 class MainActivity : AppCompatActivity() {
@@ -28,9 +29,14 @@ class MainActivity : AppCompatActivity() {
                 switchFragment(SponsorFragment())
                 return@OnNavigationItemSelectedListener true
             }
+            R.id.navigation_proshows -> {
+                switchFragment(ProShowsFragment())
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.navigation_info -> {
                 return@OnNavigationItemSelectedListener true
             }
+
         }
         false
     }
@@ -40,11 +46,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.containerFrame, HomeFragment.newInstance())
+                .add(R.id.containerFrame, ProShowsFragment())
                 .commit()
 
         goFullScreen()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.menu.getItem(3).isChecked = true
+
     }
 
     private fun goFullScreen(){
