@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.upcoming_event_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
@@ -24,7 +25,7 @@ class UpcomingAdapter(val context: Context) : RecyclerView.Adapter<UpcomingAdapt
                     .inflate(R.layout.upcoming_event_layout,parent,false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(events[position])
+        holder.bindItem(context, events[position])
     }
 
     fun addEvents(events: List<Event>){
@@ -33,10 +34,15 @@ class UpcomingAdapter(val context: Context) : RecyclerView.Adapter<UpcomingAdapt
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItem(event: Event) {
+        fun bindItem(context: Context, event: Event) {
             itemView.eventNameTV.text = event.name
             itemView.eventTime.text = Date(event.timestamp).toString().substring(4,16)
             // TODO: Set image Glide
+            if(event.imageUrl.isEmpty())
+                itemView.eventImageView.setImageResource(R.drawable.placeholder_event);
+            else
+                Picasso.with(context).load(event.imageUrl).placeholder(R.drawable.placeholder_event).into(itemView.eventImageView);
+
         }
     }
 }
