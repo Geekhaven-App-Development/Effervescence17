@@ -13,6 +13,8 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="title_proshows">Pro Shows</string>
+
     <string name="transition_avatar_border" translatable="false">avatar_border</string>
     <string name="transition_card" translatable="false">card</string>
     <string name="transition_background" translatable="false">background</string>
@@ -23,4 +25,5 @@
     <string name="details_details">DETAILS</string>
     <string name="answer">Answer</string>
     <string name="connect">CONNECT</string>
+>>>>>>> upstream/master
 </resources>

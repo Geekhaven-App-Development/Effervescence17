@@ -1,1 +1,1 @@
-include ':app', ':garland-view'
+include ':app', ':garland-view', ':glazy-viewpager'
