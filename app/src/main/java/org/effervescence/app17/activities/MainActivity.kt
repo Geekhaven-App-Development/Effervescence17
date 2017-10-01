@@ -7,10 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import org.effervescence.app17.R
-import org.effervescence.app17.fragments.DaysViewFragment
-import org.effervescence.app17.fragments.HomeFragment
-import org.effervescence.app17.fragments.ProShowsFragment
-import org.effervescence.app17.fragments.SponsorFragment
+import org.effervescence.app17.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_info -> {
-
+                switchFragment(UpdatesFragment())
                 return@OnNavigationItemSelectedListener true
             }
 

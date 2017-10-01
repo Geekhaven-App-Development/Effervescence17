@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "225833326908",
+    "firebase_url": "https://effervescence-17.firebaseio.com",
+    "project_id": "effervescence-17",
+    "storage_bucket": "effervescence-17.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225833326908:android:29b1132d8a1996e9",
+        "android_client_info": {
+          "package_name": "org.effervescence.app17"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225833326908-2no5icqjihjons9mi1v7n7pp870iq6h5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRimUuC7UJcjm6Psaeez_PVZ6Db2UOWz4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
