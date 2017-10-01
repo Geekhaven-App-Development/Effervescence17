@@ -24,6 +24,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+<<<<<<< HEAD
         animationView.setAnimation("loading_spinner.json")
         animationView.playAnimation()
         animationView.loop(true)
@@ -38,6 +39,27 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 animationView.cancelAnimation()
                 showAlert()
             }
+=======
+        // Custom animation speed or duration.
+        val animationView = findViewById<View>(R.id.animation_view) as LottieAnimationView
+        val animator = ValueAnimator.ofFloat(0f, 1f)
+                .setDuration(500)
+        //animator.addUpdateListener { animation -> animationView.setProgress(animation.animatedValue) }   //error
+        //animator.start()
+
+        if(isNetworkConnectionAvailable() == true){
+            fetchLatestEventData()
+            animationView.setAnimation("checked_done.json");
+            animationView.loop(false);
+            animationView.playAnimation();
+        }
+        else if(savedInstanceState != null ){
+            //fetch old data
+        }
+        else {
+            animationView.cancelAnimation()
+            showAlert()
+>>>>>>> ea1d69fb4ec907d6b43fca9ee754908a51908b11
         }
     }
 
