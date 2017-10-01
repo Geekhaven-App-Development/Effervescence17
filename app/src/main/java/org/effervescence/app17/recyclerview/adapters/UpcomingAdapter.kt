@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.upcoming_event_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -36,8 +37,13 @@ class UpcomingAdapter(val context: Context) : RecyclerView.Adapter<UpcomingAdapt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(context: Context, event: Event) {
             itemView.eventNameTV.text = event.name
-            itemView.eventTime.text = Date(event.timestamp).toString().substring(4,16)
-            // TODO: Set image Glide
+
+            val date = Date(event.timestamp*1000)
+            val format = SimpleDateFormat("MMM dd HH:mm")
+            format.timeZone = TimeZone.getTimeZone("Asia/India")
+            var formatted = format.format(date)
+            itemView.eventTime.text = formatted.toString()
+
             if(event.imageUrl.isEmpty())
                 itemView.eventImageView.setImageResource(R.drawable.placeholder_event);
             else
