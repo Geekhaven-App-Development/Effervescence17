@@ -12,5 +12,18 @@
     <string name="effervescence17">Effervescence17</string>
 
     <string name="action_settings">Settings</string>
+
     <string name="title_proshows">Pro Shows</string>
+
+    <string name="transition_avatar_border" translatable="false">avatar_border</string>
+    <string name="transition_card" translatable="false">card</string>
+    <string name="transition_background" translatable="false">background</string>
+    <string name="transition_list" translatable="false">list</string>
+
+    <string name="details_connect">CONNECT</string>
+    <string name="details_close">CLOSE</string>
+    <string name="details_details">DETAILS</string>
+    <string name="answer">Answer</string>
+    <string name="connect">CONNECT</string>
+>>>>>>> upstream/master
 </resources>

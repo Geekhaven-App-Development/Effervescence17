@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.effervescence.app17.R
-import org.effervescence.app17.adapters.BookmarksAdapter
-import org.effervescence.app17.adapters.UpcomingAdapter
+import org.effervescence.app17.recyclerview.adapters.BookmarksAdapter
+import org.effervescence.app17.recyclerview.adapters.UpcomingAdapter
 import org.effervescence.app17.utils.AppDB
 
 /**
@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         view.bookmarksRecyclerView.adapter = bookmarksAdapter
         upcomingAdapter.addEvents(appDB.getAllEvents())
 
-        repeat(2,{ bookmarksAdapter.addEvents(appDB.getAllEvents())})
-        repeat(2,{ upcomingAdapter.addEvents(appDB.getAllEvents())})
+        bookmarksAdapter.addEvents(appDB.getAllEvents())
+        upcomingAdapter.addEvents(appDB.getAllEvents())
     }
 }

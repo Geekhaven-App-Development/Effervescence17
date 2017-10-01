@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_info -> {
+
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.containerFrame, ProShowsFragment())
                 .commit()
 
-        goFullScreen()
+        //goFullScreen()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         navigation.menu.getItem(3).isChecked = true
 

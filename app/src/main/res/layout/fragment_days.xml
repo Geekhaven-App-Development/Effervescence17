@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:background="@drawable/dark_background"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.ramotion.garlandview.TailRecyclerView
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/daysRecyclerView">
+        android:layout_height="80dp"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/pink_corners_top"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:layout_editor_absoluteY="2dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/pink_corners_top"
+            android:layout_height="52dp"
+            android:title="Effervescence"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Schedule"
+                android:layout_marginLeft="5dp"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <com.ramotion.garlandview.TailRecyclerView
+        android:id="@+id/daysRecyclerView"
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     </com.ramotion.garlandview.TailRecyclerView>
 
-</LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

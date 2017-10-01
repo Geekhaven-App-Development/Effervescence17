@@ -25,10 +25,8 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_splash)
 
         animationView.setAnimation("loading_spinner.json")
-        animationView.scale = 0.1f
         animationView.playAnimation()
         animationView.loop(true)
-
         when {
             isNetworkConnectionAvailable() -> {
                 fetchLatestData()

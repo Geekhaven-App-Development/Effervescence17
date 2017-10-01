@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.fragment_sponsors.view.*
 import org.effervescence.app17.R
-import org.effervescence.app17.adapters.SponsorsAdapter
+import org.effervescence.app17.recyclerview.adapters.SponsorsAdapter
 import org.effervescence.app17.utils.AppDB
 
 /**
