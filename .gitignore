@@ -7,4 +7,9 @@
 /build
 /captures
 .externalNativeBuild
+<<<<<<< HEAD
 gradle.properties
+=======
+
+
+>>>>>>> ea1d69fb4ec907d6b43fca9ee754908a51908b11
