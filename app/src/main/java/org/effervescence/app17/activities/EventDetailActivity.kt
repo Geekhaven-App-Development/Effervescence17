@@ -5,19 +5,14 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
-import android.transition.Transition
 import android.util.Pair
 import android.view.View
-import android.widget.FrameLayout
+import android.widget.ImageView
 import com.squareup.picasso.Picasso
 
-
-import java.util.ArrayList
-
 import kotlinx.android.synthetic.main.activity_event_detail.*
+import kotlinx.android.synthetic.main.organizer_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.utils.AppDB
 import org.jetbrains.anko.AnkoLogger
@@ -44,12 +39,23 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             descriptionTextView.text = event.description
             facebookLinkTextView.text = event.facebookEventLink
 
+            //dateTextView.text = Date(event.timestamp.times(1000)).toString()
+            //locationTextView.text = event.location
+
+            headerImageView.scaleType = ImageView.ScaleType.CENTER_CROP
             if(event.imageUrl != ""){
-                Picasso.with(this).load(event.imageUrl)
+                Picasso.with(this).load(event.imageUrl).into(headerImageView)
+            }
+
+            event.organizers.map {
+                val view = View.inflate(this,R.layout.organizer_layout, null)
+                view.organizerNameTV.text = it.name
+                view.phoneNumberTextView.text = it.phoneNumber.toString()
+                organizerLinearLayout.addView(view)
             }
         }
 
-        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+        /*appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
 
             internal val headerImage = findViewById<View>(R.id.header_image)
             internal val headerInfo = findViewById<View>(R.id.header_info)
@@ -62,7 +68,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             internal val textVMinOffset = resources.getDimensionPixelSize(R.dimen.profile_texts_v_min_offset)
             internal val textVMaxOffset = resources.getDimensionPixelSize(R.dimen.profile_texts_v_max_offset)
             internal val textVDiff = textVMaxOffset - textVMinOffset
-            internal val header160 = resources.getDimensionPixelSize(R.dimen.dp160)
+            internal val header160 = resources.getDimensionPixelSize(R.dimen.dp190)
             internal val toolBarHeight: Int
 
             init {
@@ -133,7 +139,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 override fun onTransitionPause(transition: Transition) {}
                 override fun onTransitionResume(transition: Transition) {}
             })
-        }
+        }*/
     }
 
     override fun onSupportNavigateUp(): Boolean {

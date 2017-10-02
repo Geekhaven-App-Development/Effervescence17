@@ -15,4 +15,18 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBar2">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowEnterTransition">@transition/details_transition</item>
+        <item name="android:windowExitTransition">@transition/details_transition</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/details_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/details_transition</item>
+
+        <item name="android:windowBackground">@color/app_white</item>
+    </style>
+
+
 </resources>

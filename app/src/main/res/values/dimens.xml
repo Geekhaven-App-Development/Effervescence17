@@ -156,6 +156,7 @@
 
     <dimen name="details_avatar_border">5dp</dimen>
 
+    <dimen name="dp250">250dp</dimen>
     <dimen name="dp160">160dp</dimen>
     <dimen name="dp190">190dp</dimen>
     <dimen name="dp80">80dp</dimen>

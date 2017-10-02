@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.EventDetailActivity"/>
+        <activity android:name=".activities.EventDetailActivity" android:theme="@style/AppTheme.NoActionBar2"/>
 
         <service
             android:name=".utils.MyFirebaseInstanceIDService">
