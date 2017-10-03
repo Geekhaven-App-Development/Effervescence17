@@ -273,24 +273,26 @@
             android:orientation="horizontal">
 
             <RelativeLayout
+                android:id="@+id/bookmarkRL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageViewWatchNow"
+                    android:id="@+id/bookmarkIV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     app:srcCompat="@drawable/ic_bookmark_black_24dp" />
 
                 <TextView
+                    android:id="@+id/bookmarkTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/imageViewWatchNow"
+                    android:layout_toRightOf="@+id/bookmarkIV"
                     android:fontFamily="@font/antic"
                     android:gravity="center"
                     android:singleLine="true"
@@ -301,24 +303,26 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/reminderRL"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageViewWatchLater"
+                    android:id="@+id/reminderIV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/ic_bookmark_black_24dp" />
+                    app:srcCompat="@drawable/ic_add_reminder_black_24dp" />
 
                 <TextView
+                    android:id="@+id/reminderTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/imageViewWatchLater"
+                    android:layout_toRightOf="@+id/reminderIV"
                     android:fontFamily="@font/antic"
                     android:gravity="center"
                     android:singleLine="true"

@@ -7,6 +7,7 @@ import com.ramotion.garlandview.inner.InnerAdapter
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Event
 import org.effervescence.app17.recyclerview.viewholders.EventInnerItem
+import org.effervescence.app17.utils.AppDB
 
 import java.util.ArrayList
 

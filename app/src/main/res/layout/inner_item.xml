@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="5dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.CardView
@@ -10,7 +11,8 @@
         android:layout_height="@dimen/inner_item_height"
         android:layout_gravity="center"
         android:clickable="true"
-        app:cardCornerRadius="5dp">
+        app:cardCornerRadius="5dp"
+        android:focusable="true">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/rootConstraintLayout"
@@ -20,7 +22,7 @@
             tools:layout_editor_absoluteY="0dp">
 
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+            <ImageView
                 android:id="@+id/eventImageView"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -35,42 +37,33 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:maxWidth="200dp"
+                android:fontFamily="@font/delius"
                 android:maxLines="2"
+                android:maxWidth="200dp"
                 android:text="Rhapsody: The EDM Night"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/bookmarkImageView"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/bookmarkImageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.91"
-                app:layout_constraintStart_toEndOf="@+id/titleTextView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_bookmark_black_24dp" />
-
             <TextView
-                android:id="@+id/dateTimeTextView"
+                android:id="@+id/timeTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
-                android:text="10:00 PM October 13, 2017"
+                android:fontFamily="@font/hammersmith_one"
+                android:text="10:00 PM"
+                app:layout_constraintBottom_toTopOf="@+id/dateTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+
+
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline"
@@ -83,14 +76,32 @@
                 android:id="@+id/locationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:fontFamily="@font/acme"
                 android:text="Main Stage"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.031"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/dateTimeTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/hammersmith_one"
+                android:text="October 13, 2017"
+                app:layout_constraintBottom_toTopOf="@+id/locationTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/timeTextView"
+                app:layout_constraintVertical_bias="1.0" />
 
 
         </android.support.constraint.ConstraintLayout>

@@ -4,12 +4,12 @@ import android.content.Context
 import net.rehacktive.waspdb.WaspDb
 import net.rehacktive.waspdb.WaspFactory
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.models.Person
 import org.effervescence.app17.models.Sponsor
 
 /**
  * Created by betterclever on 16/09/17.
  */
-
 
 
 class AppDB private constructor(context: Context) {
@@ -19,23 +19,33 @@ class AppDB private constructor(context: Context) {
             "effervescence17")
 
     private val eventHash = waspDB.openOrCreateHash("events")
+    private val bookmarksHash = waspDB.openOrCreateHash("bookmarks")
     private val teamHash = waspDB.openOrCreateHash("team")
     private val sponsorHash = waspDB.openOrCreateHash("sponsors")
-
 
     companion object : SingletonHolder<AppDB, Context>(::AppDB)
 
     fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
+    fun getAllTeamMembers(): MutableList<Person>? = teamHash.getAllValues<Person>()
+    
     fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>().filter {
         it.categories.contains(category)
     }
 
+    fun getBookmarkedEvents() : List<Event>? = bookmarksHash.getAllValues<Event>()
+
+    fun addBookmark(id: Long): Boolean = bookmarksHash.put(id, getEventByID(id))
+
+    fun isBookmarked(id: Long) = (bookmarksHash.get<Event>(id) != null)
+
     fun getEventByID(id: Long): Event = eventHash.get<Event>(id)
 
-    fun storeEvents(events: List<Event>) = events.forEach { eventHash.put(it.id,it) }
+    fun storeEvents(events: List<Event>) = events.forEach { eventHash.put(it.id, it) }
 
     fun getAllSponsors(): MutableList<Sponsor> = sponsorHash.getAllValues<Sponsor>()
 
-    fun storeSponsors(sponsors: List<Sponsor>) = sponsors.forEach { sponsorHash.put(it.id,it) }
+    fun storeSponsors(sponsors: List<Sponsor>) = sponsors.forEach { sponsorHash.put(it.id, it) }
+
+    fun storeTeam(teamList: List<Person>) = teamList.forEach( {teamHash.put(it.id, it)})
 }

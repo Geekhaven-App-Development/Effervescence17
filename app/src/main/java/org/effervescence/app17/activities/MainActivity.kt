@@ -44,12 +44,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.containerFrame, ProShowsFragment())
+                .add(R.id.containerFrame, HomeFragment())
                 .commit()
 
-        //goFullScreen()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        navigation.menu.getItem(3).isChecked = true
 
     }
 

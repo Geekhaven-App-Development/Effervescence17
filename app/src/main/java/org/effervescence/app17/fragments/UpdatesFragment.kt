@@ -17,6 +17,7 @@ import org.effervescence.app17.R
 import org.effervescence.app17.models.Notification
 import org.effervescence.app17.recyclerview.adapters.UpdatesAdapter
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 /**
  * Created by sashank on 1/10/17.
@@ -24,14 +25,11 @@ import org.jetbrains.anko.doAsync
 
 class UpdatesFragment: Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_updates, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_updates, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val database = FirebaseDatabase.getInstance()
-
         refreshAdapter(view)
 
         view.refresh.setColorSchemeResources(R.color.colorAccent)
@@ -42,6 +40,7 @@ class UpdatesFragment: Fragment() {
         }
     }
 
+    // TODO: FIX IT. Asynchrony issue
     private fun refreshAdapter(view: View){
         val list = fetchLatestData()
 

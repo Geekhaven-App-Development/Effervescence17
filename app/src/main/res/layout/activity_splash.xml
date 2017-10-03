@@ -17,7 +17,7 @@
         android:contentDescription="@string/effervescence17"
         android:scaleX="1.4"
         android:scaleY="1.4"
-        android:src="@drawable/effe1" />
+        android:src="@drawable/effe2" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"

@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:id="@+id/rootLayout"
     android:layout_margin="10dp"
     android:layout_width="100dp"
     android:layout_height="wrap_content">
 
-    <com.mikhaellopez.circularimageview.CircularImageView
+    <ImageView
+        android:padding="10dp"
         android:id="@+id/eventImageView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
 
     <TextView
         android:id="@+id/eventNameTV"
