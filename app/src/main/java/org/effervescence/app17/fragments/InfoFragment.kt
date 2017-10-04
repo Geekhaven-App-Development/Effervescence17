@@ -31,10 +31,10 @@ class InfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val fragmentList = ArrayList<Fragment>()
+        fragmentList.add(TeamFragment())
         fragmentList.add(SponsorFragment())
         fragmentList.add(SponsorFragment())
-        fragmentList.add(SponsorFragment())
-        fragmentList.add(SponsorFragment())
+        fragmentList.add(AboutUsFragment())
 
         val mPager = view!!.findViewById<ViewPager>(R.id.pager)
         val mPagerAdapter = InfoFragmentAdapter(activity.supportFragmentManager, fragmentList)

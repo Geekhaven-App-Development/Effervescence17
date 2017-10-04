@@ -45,7 +45,7 @@ class ProShowsFragment : Fragment(){
 
         val desc_edm = "EDM isn’t just about drops and rave, it is the form of music that has something to offer" +
                 " to everyone. Get ready to match you heartbeats with the beats and drops and dance your heart out " +
-                "as famous DJs set the electric mood in the atmosphere!"
+                "with famous Portuguese DJ duos, Club Banditz, all set to raise the electric mood in the atmosphere!"
 
         val desc_kavyom = "Gear up to enjoy the Infinite Sky of Poetry at Kavyom, being held for the very first " +
                 "time in IIIT Allahabad. Relish an indelible and a stupendous evening with the one and only, Kumar " +

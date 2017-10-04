@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_notifications -> {
                 // Temporary: FIX IT
-                switchFragment(SponsorFragment())
+                switchFragment(UpdatesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_proshows -> {

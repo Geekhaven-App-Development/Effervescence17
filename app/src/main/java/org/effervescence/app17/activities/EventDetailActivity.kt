@@ -27,7 +27,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
-        remindForEvent(null,"Test","Testing notifs")
+        //remindForEvent(null,"Test","Testing notifs")
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
