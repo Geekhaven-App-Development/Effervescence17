@@ -43,13 +43,16 @@ class UpcomingAdapter(val context: Context) : RecyclerView.Adapter<UpcomingAdapt
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            itemView.eventTimeTV.text = SimpleDateFormat("hh:mm a  MMMM d, YYYY").format(calendar.time)
+            val sdf = SimpleDateFormat("hh:mm a  MMMM d")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            itemView.eventTimeTV.text = sdf.format(calendar.time)
 
             GlideApp.with(context)
-                        .load(event.imageUrl)
-                        .circleCrop()
-                        .placeholder(R.drawable.ic_event)
-                        .into(itemView.eventImageView)
+                    .load(event.imageUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_event)
+                    .into(itemView.eventImageView)
 
             itemView.rootLayout.setOnClickListener({
                 itemView.context.startActivity<EventDetailActivity>("id" to event.id)

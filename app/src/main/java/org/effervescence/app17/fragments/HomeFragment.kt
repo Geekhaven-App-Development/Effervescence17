@@ -6,18 +6,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.recyclerview.adapters.BookmarksAdapter
 import org.effervescence.app17.recyclerview.adapters.UpcomingAdapter
 import org.effervescence.app17.utils.AppDB
-import java.util.*
 
 /**
  * Created by betterclever on 16/09/17.
  */
 
 class HomeFragment : Fragment() {
+
+    private lateinit var appDB: AppDB
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -26,6 +28,11 @@ class HomeFragment : Fragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        appDB = AppDB.getInstance(context)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -54,17 +61,26 @@ class HomeFragment : Fragment() {
         view.upcomingRecyclerView.isDrawingCacheEnabled = true
         view.upcomingRecyclerView.drawingCacheQuality = View.DRAWING_CACHE_QUALITY_HIGH
 
-        val appDB = AppDB.getInstance(context)
+        appDB = AppDB.getInstance(context)
         val upcomingAdapter = UpcomingAdapter(context)
         val bookmarksAdapter = BookmarksAdapter(context)
         view.upcomingRecyclerView.adapter = upcomingAdapter
         view.bookmarksRecyclerView.adapter = bookmarksAdapter
 
         upcomingAdapter.addEvents(appDB.getAllEvents()
-                .filter { it.timestamp > System.currentTimeMillis()/1000L }
+                .filter { it.timestamp > System.currentTimeMillis() / 1000L }
                 .sortedBy { it.timestamp }
-                .subList(0,10))
+                .subList(0, 10))
 
         appDB.getBookmarkedEvents()?.let { bookmarksAdapter.addEvents(it.sortedBy { it.timestamp }) }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (bookmarksRecyclerView.adapter as BookmarksAdapter).clearData()
+        appDB.getBookmarkedEvents()?.let {
+            (bookmarksRecyclerView.adapter as BookmarksAdapter)
+                    .addEvents(it.sortedBy { it.timestamp })
+        }
     }
 }

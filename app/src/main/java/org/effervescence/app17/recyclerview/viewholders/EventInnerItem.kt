@@ -25,8 +25,13 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
         calendar.timeInMillis = event.timestamp.times(1000L)
 
-        itemView.timeTextView.text = SimpleDateFormat("hh:mm a").format(calendar.time)
-        itemView.dateTextView.text = SimpleDateFormat("MMMM d, YYYY").format(calendar.time)
+        val sdf = SimpleDateFormat("hh:mm a")
+        sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+        itemView.timeTextView.text = sdf.format(calendar.time)
+
+        sdf.applyPattern("MMMM d, YYYY")
+        itemView.dateTextView.text = sdf.format(calendar.time)
 
         GlideApp.with(itemView.context)
                 .load(event.imageUrl)
@@ -38,15 +43,12 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
             itemView.context.startActivity<EventDetailActivity>("id" to event.id)
         })
 
-        /*if(appDB.isBookmarked(event.id)){
-            itemView.bookmarkImageView.setImageResource(R.drawable.ic_bookmark_black_24dp)
-        }
-        else {
-            itemView.bookmarkImageView.setImageResource(R.drawable.ic_bookmark_border_black_24dp)
-        }*/
     }
 
     fun clearContent() {
-        // Clear binding
+        itemView.titleTextView.text = ""
+        itemView.locationTextView.text = ""
+        itemView.timeTextView.text = ""
+        itemView.dateTextView.text = ""
     }
 }

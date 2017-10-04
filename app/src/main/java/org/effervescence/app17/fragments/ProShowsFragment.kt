@@ -21,9 +21,12 @@ class ProShowsFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_proshows, container, false)
-        setupViewPager(v)
-        return v
+        return inflater.inflate(R.layout.fragment_proshows, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupViewPager(view)
     }
 
     private fun setupViewPager(view: View) {
@@ -49,7 +52,7 @@ class ProShowsFragment : Fragment() {
                 "Effervescence'17 presents to you the Humour Night for the very first time. We're bringing in the pros, " +
                 "to help you forget your woes, at least for that one night!"
 
-        val pagerAdapter = GlazyFragmentPagerAdapter(fragmentManager, context)
+        val pagerAdapter = GlazyFragmentPagerAdapter(childFragmentManager, context)
 
         pagerAdapter.addCardItem(
                 GlazyCard()

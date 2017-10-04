@@ -28,12 +28,12 @@ class AppDB private constructor(context: Context) {
     fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
     fun getAllTeamMembers(): MutableList<Person>? = teamHash.getAllValues<Person>()
-    
-    fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>().filter {
-        it.categories.contains(category)
-    }
 
-    fun getBookmarkedEvents() : List<Event>? = bookmarksHash.getAllValues<Event>()
+    fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>()
+            .filter { it.categories.contains(category) }
+            .sortedBy { it.timestamp }
+
+    fun getBookmarkedEvents(): List<Event>? = bookmarksHash.getAllValues<Event>()
 
     fun addBookmark(id: Long): Boolean = bookmarksHash.put(id, getEventByID(id))
 
@@ -47,5 +47,5 @@ class AppDB private constructor(context: Context) {
 
     fun storeSponsors(sponsors: List<Sponsor>) = sponsors.forEach { sponsorHash.put(it.id, it) }
 
-    fun storeTeam(teamList: List<Person>) = teamList.forEach( {teamHash.put(it.id, it)})
+    fun storeTeam(teamList: List<Person>) = teamList.forEach({ teamHash.put(it.id, it) })
 }

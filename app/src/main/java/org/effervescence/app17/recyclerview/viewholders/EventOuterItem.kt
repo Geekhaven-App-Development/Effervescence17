@@ -71,6 +71,7 @@ class EventOuterItem(itemView: View, pool: RecyclerView.RecycledViewPool) : Head
 
         itemView.headerTextView.text = category
         mRecyclerView.layoutManager = InnerLayoutManager()
+        (mRecyclerView.adapter as GarlandInnerAdapter).clearData()
         innerDataList?.let { (mRecyclerView.adapter as GarlandInnerAdapter).addData(it) }
 
     }
