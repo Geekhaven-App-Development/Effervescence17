@@ -27,7 +27,7 @@ class TeamAdapter(val context: Context) : RecyclerView.Adapter<TeamAdapter.ViewH
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.upcoming_event_layout, parent, false))
+                    .inflate(R.layout.layout_team_member, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(context, teamList[position])
