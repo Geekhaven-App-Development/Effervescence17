@@ -107,6 +107,16 @@
                 android:scrollbars="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Bookmarks!"
+                android:padding="20dp"
+                android:id="@+id/noDataText"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

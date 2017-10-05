@@ -3,6 +3,7 @@ package org.effervescence.app17.utils
 import android.content.Context
 import net.rehacktive.waspdb.WaspDb
 import net.rehacktive.waspdb.WaspFactory
+import org.effervescence.app17.models.Developer
 import org.effervescence.app17.models.Event
 import org.effervescence.app17.models.Person
 import org.effervescence.app17.models.Sponsor
@@ -21,6 +22,7 @@ class AppDB private constructor(context: Context) {
     private val eventHash = waspDB.openOrCreateHash("events")
     private val bookmarksHash = waspDB.openOrCreateHash("bookmarks")
     private val teamHash = waspDB.openOrCreateHash("team")
+    private val developerHash = waspDB.openOrCreateHash("developer")
     private val sponsorHash = waspDB.openOrCreateHash("sponsors")
 
     companion object : SingletonHolder<AppDB, Context>(::AppDB)
@@ -28,6 +30,8 @@ class AppDB private constructor(context: Context) {
     fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
     fun getAllTeamMembers(): MutableList<Person>? = teamHash.getAllValues<Person>()
+
+    fun getAllDeveloperMembers(): MutableList<Developer>? = developerHash.getAllValues<Developer>()
     
     fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>().filter {
         it.categories.contains(category)

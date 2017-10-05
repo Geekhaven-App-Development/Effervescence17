@@ -1,5 +1,6 @@
 package org.effervescence.app17.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +10,7 @@ import org.effervescence.app17.R
 import android.content.Intent
 import android.net.Uri
 import kotlinx.android.synthetic.main.fragment_about.view.*
-
+import android.support.customtabs.CustomTabsIntent
 
 /**
  * Created by sashank on 4/10/17.
@@ -25,18 +26,15 @@ class AboutUsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view!!.fb_icon.setOnClickListener({
-            var intent: Intent? = null
             val Id = "effervescence.iiita/"
+            val url = "https://www.facebook.com/" + Id
             try {
                 context.packageManager.getPackageInfo("com.facebook.katana", 0)
-                val url = "https://www.facebook.com/" + Id
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=" + url))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=" + url))
+                context.startActivity(intent)
             } catch (e: Exception) {
-                val url = "https://facebook.com/" + Id
-                intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(url)
+                openChromeTab(context,url)
             }
-            context.startActivity(intent)
         })
 
         view.twitter_icon.setOnClickListener ({
@@ -46,30 +44,31 @@ class AboutUsFragment : Fragment() {
                 startActivity(intent)
 
             } catch (e: Exception) {
-                startActivity(Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://twitter.com/goeffervescence")))
+                openChromeTab(context,"https://twitter.com/goeffervescence")
             }
 
         })
 
         view.insta_icon.setOnClickListener ({
-            startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.instagram.com/goeffervescence/")))
+            openChromeTab(context,"https://www.instagram.com/goeffervescence/")
         })
 
         view.youtube_icon.setOnClickListener ({
-            startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.youtube.com/channel/UCSKd_5A0v36U5Bt0y-SDJWg")))
+            openChromeTab(context,"https://www.youtube.com/channel/UCSKd_5A0v36U5Bt0y-SDJWg")
         })
 
         view.tv_web.setOnClickListener ({
-            startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.effe.org.in")))
+            openChromeTab(context,"https://www.effe.org.in")
         })
 
         view.tv_social_cause.setOnClickListener ({
-            startActivity(Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.effe.org.in/social-cause/")))
+            openChromeTab(context,"https://www.effe.org.in/social-cause/")
         })
+    }
+
+    fun openChromeTab(context: Context,url: String){
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(context, Uri.parse(url))
     }
 }

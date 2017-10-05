@@ -27,7 +27,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
-        //remindForEvent(null,"Test","Testing notifs")
+        remindForEvent(null,"Test","Testing notifs")
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -99,9 +99,9 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        //TODO: For demo set after 5 seconds.
+        //TODO: For demo set after 30 minutes.
         alarmManager.set(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + 10 * 1000, pendingIntent)
+                SystemClock.elapsedRealtime() + 30 * 60 * 1000, pendingIntent)
 
     }
 

@@ -37,6 +37,10 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
         notifyDataSetChanged()
     }
 
+    fun  removeEvent(event: Event) {
+
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(context: Context, event: Event) {
             itemView.titleTextView.text = event.name
@@ -56,6 +60,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .circleCrop()
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.eventImageView)
+
 
         }
     }
