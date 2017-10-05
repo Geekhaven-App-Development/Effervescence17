@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app17.R
+import org.effervescence.app17.models.Developer
 import org.effervescence.app17.models.Event
 import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.models.Person
@@ -94,9 +95,21 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                     appDB.storeTeam(teamArray.toList())
                 }
 
+                val request4 = Request.Builder()
+                        .url("https://effervescence-iiita.github.io/Effervescence17/data/developer.json")
+                        .build()
+                val response4 = client.newCall(request4).execute()
+
+                if(response4.isSuccessful) {
+                    val developersArray = Moshi.Builder().build()
+                            .adapter<Array<Developer>>(Array<Developer>::class.java)
+                            .fromJson(response4.body()?.string())
+
+                    appDB.storeDevelopers(developersArray.toList())
+                }
 
                 uiThread {
-                    if (!response.isSuccessful || !response2.isSuccessful || !response3.isSuccessful) {
+                    if (!response.isSuccessful || !response2.isSuccessful || !response3.isSuccessful || !response4.isSuccessful) {
                         if (sharedPrefs.getBoolean("firstrun", true)) {
                             showAlert()
                         } else {

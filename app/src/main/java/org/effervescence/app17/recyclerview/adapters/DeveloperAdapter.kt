@@ -45,11 +45,16 @@ class DeveloperAdapter(val context: Context) : RecyclerView.Adapter<DeveloperAda
                     .circleCrop()
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.personImageView)
-            itemView.floatingActionButton.setOnClickListener ({
-                val builder = CustomTabsIntent.Builder()
-                val customTabsIntent = builder.build()
-                customTabsIntent.launchUrl(context, Uri.parse(developer.gitHubLink))
-            })
+
+          itemView.floatingActionButton.setOnClickListener {
+                openChromeTab(context,developer.gitHubLink)
+          }
+        }
+       
+        fun openChromeTab(context: Context,url: String){
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(context, Uri.parse(url))
         }
     }
 }
