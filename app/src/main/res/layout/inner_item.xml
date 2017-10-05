@@ -42,10 +42,12 @@
                 android:fontFamily="@font/delius"
                 android:maxLines="2"
                 android:maxWidth="200dp"
+                android:ellipsize="end"
                 android:text="Rhapsody: The EDM Night"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                 android:id="@+id/timeTextView"
@@ -83,6 +85,7 @@
                 android:fontFamily="@font/acme"
                 android:text="Main Stage"
                 android:textSize="16sp"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -22,16 +22,25 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
 
         val appDB = AppDB.getInstance(itemView.context)
 
-        val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
-        calendar.timeInMillis = event.timestamp.times(1000L)
+        if(event.timestamp < 100L){
+            itemView.dateTextView.text = "Online"
+            itemView.timeTextView.visibility = View.GONE
+            itemView.locationTextView.visibility = View.GONE
+        }
 
-        val sdf = SimpleDateFormat("hh:mm a")
-        sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+        else {
 
-        itemView.timeTextView.text = sdf.format(calendar.time)
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
+            calendar.timeInMillis = event.timestamp.times(1000L)
 
-        sdf.applyPattern("MMMM d, YYYY")
-        itemView.dateTextView.text = sdf.format(calendar.time)
+            val sdf = SimpleDateFormat("hh:mm a")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            itemView.timeTextView.text = sdf.format(calendar.time)
+
+            sdf.applyPattern("MMMM d, YYYY")
+            itemView.dateTextView.text = sdf.format(calendar.time)
+        }
 
         GlideApp.with(itemView.context)
                 .load(event.imageUrl)

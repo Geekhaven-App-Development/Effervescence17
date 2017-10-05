@@ -29,7 +29,7 @@ class AppDB private constructor(context: Context) {
 
     fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
-    fun getAllTeamMembers(): MutableList<Person>? = teamHash.getAllValues<Person>()
+    fun getAllTeamMembers() = teamHash.getAllValues<Person>().sortedBy { it.id }
 
     fun  getAllDeveloperMembers(): MutableList<Developer>? = developerHash.getAllValues<Developer>()
 
@@ -40,6 +40,8 @@ class AppDB private constructor(context: Context) {
     fun getBookmarkedEvents(): List<Event>? = bookmarksHash.getAllValues<Event>()
 
     fun addBookmark(id: Long): Boolean = bookmarksHash.put(id, getEventByID(id))
+
+    fun removeBookmark(id: Long): Boolean = bookmarksHash.remove(id)
 
     fun isBookmarked(id: Long) = (bookmarksHash.get<Event>(id) != null)
 

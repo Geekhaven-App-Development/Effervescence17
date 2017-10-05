@@ -27,7 +27,6 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
-        remindForEvent(null,"Test","Testing notifs")
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -90,6 +89,11 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 additionalInfoTextView.text = event.additionalInfo.joinToString { "\n" }
             }
 
+            if(event.timestamp < 100L){
+                reminderTV.text = "Online Event"
+                reminderRL.isClickable = false
+            }
+
 
             bookmarkRL.setOnClickListener({
                 if(appDB.addBookmark(event.id)){
@@ -99,8 +103,19 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                     toast("Sorry! An error occurred.")
                 }
             })
-        }
 
+            reminderRL.setOnClickListener ({
+                if(event.timestamp > 100L){
+                    toast("Reminder Added Successfully!!")
+                    if(event.location.isEmpty())
+                        remindForEvent(calendar.timeInMillis,"Reminder!!",
+                                event.name + " is about to start!")
+                    else
+                        remindForEvent(calendar.timeInMillis,"Reminder!!",
+                                event.name + " is about to start. Reach " + event.location + "!")
+                }
+            })
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -109,7 +124,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
     }
 
 
-    fun remindForEvent(dateTime: Date?, title: String, message: String) {
+    fun remindForEvent(time: Long, title: String, message: String) {
 
         val context = baseContext
         val alarmIntent = Intent(context, AlarmReceiver().javaClass)
@@ -120,10 +135,11 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        //TODO: For demo set after 30 minutes.
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + 30 * 60 * 1000, pendingIntent)
+        //Reminder at 10 minutes before the event
+        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, time - 10 * 10 * 1000, pendingIntent)
 
+        //For testing...
+        //alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 10 * 1000 , pendingIntent)
     }
 
 }
