@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.effervescence.app17.R
@@ -72,7 +73,15 @@ class HomeFragment : Fragment() {
                 .sortedBy { it.timestamp }
                 .subList(0, 10))
 
-        appDB.getBookmarkedEvents()?.let { bookmarksAdapter.addEvents(it.sortedBy { it.timestamp }) }
+
+
+        if(appDB.getBookmarkedEvents()!!.isEmpty()) {
+            Toast.makeText(context, "No Bookmarks!", Toast.LENGTH_SHORT).show()
+            view.bookmarksRecyclerView.visibility = View.GONE
+            view.noDataText.visibility = View.VISIBLE
+        }
+        else
+            appDB.getBookmarkedEvents()?.let { bookmarksAdapter.addEvents(it.sortedBy { it.timestamp }) }
     }
 
     override fun onResume() {

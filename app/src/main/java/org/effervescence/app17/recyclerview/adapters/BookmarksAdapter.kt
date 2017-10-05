@@ -64,6 +64,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.eventImageView)
 
+
         }
     }
 }

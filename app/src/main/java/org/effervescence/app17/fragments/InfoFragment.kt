@@ -1,12 +1,9 @@
 package org.effervescence.app17.fragments
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,22 +24,18 @@ class InfoFragment : Fragment() {
         return inflater!!.inflate(R.layout.fragment_info, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val fragmentList = ArrayList<Fragment>()
+        fragmentList.add(TeamFragment())
+        fragmentList.add(DeveloperFragment())
         fragmentList.add(SponsorFragment())
-        fragmentList.add(SponsorFragment())
-        fragmentList.add(SponsorFragment())
-        fragmentList.add(SponsorFragment())
+        fragmentList.add(AboutUsFragment())
 
-        val mPager = view!!.findViewById<ViewPager>(R.id.pager)
         val mPagerAdapter = InfoFragmentAdapter(activity.supportFragmentManager, fragmentList)
-
-        mPager.adapter = mPagerAdapter
-
-        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
-        tabLayout.setupWithViewPager(view.pager)
+        view.pager.adapter = mPagerAdapter
+        view.tab_layout.setupWithViewPager(view.pager)
 
     }
 

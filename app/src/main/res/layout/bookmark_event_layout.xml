@@ -80,5 +80,14 @@
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_cancel_24dp"
+            app:layout_constraintTop_toBottomOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

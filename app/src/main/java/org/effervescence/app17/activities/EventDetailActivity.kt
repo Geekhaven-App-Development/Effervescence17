@@ -120,9 +120,9 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        //TODO: For demo set after 5 seconds.
+        //TODO: For demo set after 30 minutes.
         alarmManager.set(AlarmManager.ELAPSED_REALTIME,
-                SystemClock.elapsedRealtime() + 10 * 1000, pendingIntent)
+                SystemClock.elapsedRealtime() + 30 * 60 * 1000, pendingIntent)
 
     }
 
