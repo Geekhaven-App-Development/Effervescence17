@@ -54,7 +54,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            val sdf = SimpleDateFormat("hh:mm a  MMMM d, YYYY")
+            val sdf = SimpleDateFormat("hh:mm a  MMMM d, yyyy")
             sdf.timeZone = TimeZone.getTimeZone("Asia/India")
 
             itemView.timeTextView.text = sdf.format(calendar.time)

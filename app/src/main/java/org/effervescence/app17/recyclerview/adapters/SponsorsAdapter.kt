@@ -22,7 +22,6 @@ class SponsorsAdapter(private val sponsorsList: List<Sponsor>, val context: Cont
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(sponsorsList[position])
-        //Picasso.with(context).load(sponsorsList[position].imageUrl).into(holder.image)
     }
 
     override fun getItemCount(): Int {
