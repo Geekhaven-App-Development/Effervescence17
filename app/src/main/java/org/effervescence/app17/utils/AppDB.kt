@@ -55,4 +55,6 @@ class AppDB private constructor(context: Context) {
 
     fun storeTeam(teamList: List<Person>) = teamList.forEach({ teamHash.put(it.id, it) })
 
+    fun storeDevelopers(developers: List<Developer>) = developers.forEach({developerHash.put(it.id,it)})
+
 }

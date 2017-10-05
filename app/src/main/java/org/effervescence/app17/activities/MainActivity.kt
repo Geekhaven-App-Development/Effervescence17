@@ -1,5 +1,8 @@
 package org.effervescence.app17.activities
 
+import android.app.FragmentManager
+import android.app.FragmentTransaction
+import android.app.PendingIntent.getActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -34,7 +37,12 @@ class MainActivity : AppCompatActivity() {
                 switchFragment(InfoFragment())
                 return@OnNavigationItemSelectedListener true
             }
-
+        }
+        val backStackEntry = supportFragmentManager.backStackEntryCount
+        if (backStackEntry > 0) {
+            for (i in 0 until backStackEntry) {
+                supportFragmentManager.popBackStackImmediate()
+            }
         }
         false
     }
@@ -49,6 +57,16 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val backStackEntry = supportFragmentManager.backStackEntryCount
+        if (backStackEntry > 0) {
+            for (i in 0 until backStackEntry) {
+                supportFragmentManager.popBackStackImmediate()
+            }
+        }
     }
 
     private fun goFullScreen(){

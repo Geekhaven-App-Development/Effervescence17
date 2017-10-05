@@ -1,6 +1,8 @@
 package org.effervescence.app17.recyclerview.adapters
 
 import android.content.Context
+import android.net.Uri
+import android.support.customtabs.CustomTabsIntent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +45,14 @@ class DeveloperAdapter(val context: Context) : RecyclerView.Adapter<DeveloperAda
                     .circleCrop()
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.personImageView)
+            itemView.floatingActionButton.setOnClickListener {
+                openChromeTab(context,developer.gitHubLink)
+            }
+        }
+        fun openChromeTab(context: Context,url: String){
+            val builder = CustomTabsIntent.Builder()
+            val customTabsIntent = builder.build()
+            customTabsIntent.launchUrl(context, Uri.parse(url))
         }
     }
 }
