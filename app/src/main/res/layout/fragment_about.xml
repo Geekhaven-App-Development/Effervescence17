@@ -15,8 +15,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/delius"
             android:padding="10dp"
-            android:fontFamily="@font/aref_ruqaa"
             android:text="@string/about_effe"
             android:textSize="18sp" />
 
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:fontFamily="@font/delius"
+            android:fontFamily="@font/aref_ruqaa"
             android:text="Contact Us:"
             android:textSize="20sp"
             android:textStyle="bold" />
