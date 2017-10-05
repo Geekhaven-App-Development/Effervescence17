@@ -1,11 +1,17 @@
 package org.effervescence.app17.activities
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
-import android.os.SystemClock
+import android.support.customtabs.CustomTabsIntent
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
@@ -19,10 +25,14 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
+import android.util.Log
 
 class EventDetailActivity : AppCompatActivity(), AnkoLogger {
 
-    private lateinit var appDB : AppDB
+    private lateinit var appDB: AppDB
+    private lateinit var callNumber: String
+    val mainActivity = this
+    val requestCode = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +53,25 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             facebookLinkTextView.text = event.facebookEventLink
 
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
-            calendar.timeInMillis = event.timestamp.times(1000L)
+            if (event.timestamp < 100L) {
+                timeTextView.text = "Online Event"
+                dateTextView.text = ""
+                reminderTV.text = "Online Event"
+                reminderRL.isClickable = false
+                locationTextView.text = "Online"
+            } else {
+                calendar.timeInMillis = event.timestamp.times(1000L)
 
-            val sdf = SimpleDateFormat("hh:mm a")
-            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+                val sdf = SimpleDateFormat("hh:mm a")
+                sdf.timeZone = TimeZone.getTimeZone("Asia/India")
 
-            timeTextView.text = sdf.format(calendar.time)
+                timeTextView.text = sdf.format(calendar.time)
 
-            sdf.applyPattern("MMMM d, yyyy")
-            dateTextView.text = sdf.format(calendar.time)
+                sdf.applyPattern("MMMM d, yyyy")
+                dateTextView.text = sdf.format(calendar.time)
 
-            locationTextView.text = event.location
+                locationTextView.text = event.location
+            }
 
             headerImageView.scaleType = ImageView.ScaleType.CENTER_CROP
             if (event.imageUrl != "") {
@@ -63,11 +81,25 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             event.organizers.map {
                 val view = View.inflate(this, R.layout.organizer_layout, null)
                 view.organizerNameTV.text = it.name
-                view.positionTextView.text = it.phoneNumber.toString()
+                callNumber = it.phoneNumber.toString()
+                view.positionTextView.text = callNumber
+
+                view.button2.setOnClickListener({
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.CALL_PHONE)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this,
+                                arrayOf(Manifest.permission.READ_CONTACTS),
+                                requestCode)
+                    }
+                    else
+                        startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + callNumber)))
+                })
+
                 organizerLinearLayout.addView(view)
             }
 
-            if(appDB.isBookmarked(event.id)){
+            if (appDB.isBookmarked(event.id)) {
                 bookmarkTV.text = "Bookmarked"
             }
 
@@ -75,46 +107,54 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
 
             })
 
-            if(event.facebookEventLink.isBlank()){
+            if (event.facebookEventLink.isBlank()) {
                 facebookLinkLayout.visibility = View.GONE
             }
 
-            if(event.organizers.isEmpty()){
+            if (event.organizers.isEmpty()) {
                 organizersLayout.visibility = View.GONE
             }
 
-            if(event.additionalInfo.isEmpty()){
+            if (event.additionalInfo.isEmpty()) {
                 additionalInfoLayout.visibility = View.GONE
             } else {
                 additionalInfoTextView.text = event.additionalInfo.joinToString { "\n" }
             }
 
-            if(event.timestamp < 100L){
-                reminderTV.text = "Online Event"
-                reminderRL.isClickable = false
-            }
-
-
             bookmarkRL.setOnClickListener({
-                if(appDB.addBookmark(event.id)){
+                if (appDB.addBookmark(event.id)) {
                     toast("Bookmark Added Successfully!!")
                     bookmarkTV.text = "Bookmarked"
-                }else {
+                } else {
                     toast("Sorry! An error occurred.")
                 }
             })
 
-            reminderRL.setOnClickListener ({
-                if(event.timestamp > 100L){
+            reminderRL.setOnClickListener({
+                if (event.timestamp > 100L) {
                     toast("Reminder Added Successfully!!")
-                    if(event.location.isEmpty())
-                        remindForEvent(calendar.timeInMillis,"Reminder!!",
+                    if (event.location.isEmpty())
+                        remindForEvent(calendar.timeInMillis, "Reminder!!",
                                 event.name + " is about to start!")
                     else
-                        remindForEvent(calendar.timeInMillis,"Reminder!!",
+                        remindForEvent(calendar.timeInMillis, "Reminder!!",
                                 event.name + " is about to start. Reach " + event.location + "!")
                 }
             })
+
+            facebookLinkLayout.setOnClickListener({
+                val url = event.facebookEventLink
+                try {
+                    baseContext.packageManager.getPackageInfo("com.facebook.katana", 0)
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=" + url))
+                    baseContext.startActivity(intent)
+                } catch (e: Exception) {
+                    val builder = CustomTabsIntent.Builder()
+                    val customTabsIntent = builder.build()
+                    customTabsIntent.launchUrl(this, Uri.parse(url))
+                }
+            })
+
         }
     }
 
@@ -142,4 +182,13 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
         //alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 10 * 1000 , pendingIntent)
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            requestCode -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + callNumber)))
+            } else {
+                Log.d("TAG", "Call Permission Not Granted")
+            }
+        }
+    }
 }

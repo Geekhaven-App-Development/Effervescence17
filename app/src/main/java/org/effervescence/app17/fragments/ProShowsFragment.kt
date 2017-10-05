@@ -87,7 +87,7 @@ class ProShowsFragment : Fragment() {
         pagerAdapter.addCardItem(
                 GlazyCard()
                         .withTitle("HUMOUR NIGHT")
-                        .withSubTitle("12th October")
+                        .withSubTitle("14th October")
                         .withDescription(desc_humour.toUpperCase())
                         .withImageRes(imgHumour)
                         .withImageCutType(ImageCutType.WAVE)

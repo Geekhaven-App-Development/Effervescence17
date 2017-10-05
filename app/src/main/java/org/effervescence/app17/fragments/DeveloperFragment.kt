@@ -3,6 +3,7 @@ package org.effervescence.app17.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class DeveloperFragment: Fragment(){
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = adapter
         appDB.getAllDeveloperMembers()?.let { adapter.addDeveloper(it) }
+        //Log.d("DATA", appDB.getAllDeveloperMembers()?.toString())
 
     }
 }
