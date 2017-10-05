@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.bookmark_event_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.activities.EventDetailActivity
 import org.effervescence.app17.models.Event
+import org.effervescence.app17.utils.AppDB
 import org.effervescence.app17.utils.GlideApp
 import org.jetbrains.anko.startActivity
 import java.text.SimpleDateFormat
@@ -41,6 +42,11 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
         this.events.clear()
     }
 
+    fun deleteEvent(event: Event) {
+        this.events.remove(event)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(context: Context, event: Event) {
             itemView.titleTextView.text = event.name
@@ -64,7 +70,11 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.eventImageView)
 
-
+            // TODO : Refresh layout on removing bookmark
+            itemView.cancelBookmark.setOnClickListener ({
+                val appDB = AppDB.getInstance(context)
+                appDB.removeBookmark(event.id)
+            })
         }
     }
 }
