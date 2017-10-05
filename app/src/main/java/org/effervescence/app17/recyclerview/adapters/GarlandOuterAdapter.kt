@@ -12,14 +12,16 @@ import org.effervescence.app17.recyclerview.viewholders.EventOuterItem
  * Created by betterclever on 29/09/17.
  */
 
-class GarlandOuterAdapter(private val mData: List<List<Event>>) : TailAdapter<EventOuterItem>() {
+class GarlandOuterAdapter(private val categories: Array<String>, private val mData: Map<String, List<Event>>) : TailAdapter<EventOuterItem>() {
 
-    override fun onBindViewHolder(holder: EventOuterItem?, position: Int) {
-        holder?.setContent(mData[position])
+    override fun onBindViewHolder(holder: EventOuterItem, position: Int) {
+        holder.setContent(categories[position], mData[categories[position]])
     }
 
     private val POOL_SIZE = 16
     private val mPool = RecyclerView.RecycledViewPool()
+
+
 
     init {
         mPool.setMaxRecycledViews(0, POOL_SIZE)
@@ -27,18 +29,12 @@ class GarlandOuterAdapter(private val mData: List<List<Event>>) : TailAdapter<Ev
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventOuterItem {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-
-        print("Hello")
         return EventOuterItem(view, mPool)
     }
 
 
-    override fun getItemCount(): Int {
-        return mData.size
-    }
+    override fun getItemCount(): Int = categories.size
 
-    override fun getItemViewType(position: Int): Int {
-        return R.layout.event_outer_item
-    }
+    override fun getItemViewType(position: Int): Int = R.layout.event_outer_item
 
 }

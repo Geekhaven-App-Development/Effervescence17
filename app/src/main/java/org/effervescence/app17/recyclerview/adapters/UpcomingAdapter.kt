@@ -1,7 +1,6 @@
 package org.effervescence.app17.recyclerview.adapters
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -41,16 +40,19 @@ class UpcomingAdapter(val context: Context) : RecyclerView.Adapter<UpcomingAdapt
         fun bindItem(context: Context, event: Event) {
             itemView.eventNameTV.text = event.name
 
-            val date = Date(event.timestamp * 1000)
-            val format = SimpleDateFormat("MMM dd HH:mm")
-            format.timeZone = TimeZone.getTimeZone("Asia/India")
-            val formatted = format.format(date)
-            itemView.eventTime.text = formatted.toString()
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
+            calendar.timeInMillis = event.timestamp.times(1000L)
+
+            val sdf = SimpleDateFormat("hh:mm a  MMMM d")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            itemView.eventTimeTV.text = sdf.format(calendar.time)
+
             GlideApp.with(context)
-                        .load(event.imageUrl)
-                        .circleCrop()
-                        .placeholder(R.drawable.ic_event)
-                        .into(itemView.eventImageView)
+                    .load(event.imageUrl)
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_event)
+                    .into(itemView.eventImageView)
 
             itemView.rootLayout.setOnClickListener({
                 itemView.context.startActivity<EventDetailActivity>("id" to event.id)

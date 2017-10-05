@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.squareup.moshi.Moshi
+import kotlinx.android.synthetic.main.fragment_updates.*
 import kotlinx.android.synthetic.main.fragment_updates.view.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -45,6 +46,26 @@ class UpdatesFragment: Fragment(){
     // TODO: FIX IT. Asynchrony issue
     private fun refreshAdapter(view: View){
         fetchLatestData(view)
+/*=======
+        //val list = fetchLatestData()
+
+        val list: Array<Notification> =  Array(8) { Notification(12344,
+                "Hola Amigos!!",
+                "Welcome to Effe '17. Hope to enthrall you all!!",
+                "Team effe",1224589)}
+
+        if(list!= null) {
+            val updatesAdapter = UpdatesAdapter(activity, list)
+            val updatesRecyclerView = view.updates_list
+            updatesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+            updatesRecyclerView.adapter = updatesAdapter
+        }
+        else{
+            updates.visibility = View.VISIBLE
+            updates_list.visibility = View.GONE
+        }
+
+>>>>>>> upstream/master*/
     }
 
     private fun fetchLatestData(view: View){

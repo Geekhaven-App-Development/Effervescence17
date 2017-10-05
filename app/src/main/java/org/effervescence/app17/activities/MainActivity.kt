@@ -18,12 +18,12 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_schedule -> {
-                switchFragment(DaysViewFragment())
+                switchFragment(EventsViewFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 // Temporary: FIX IT
-                switchFragment(SponsorFragment())
+                switchFragment(UpdatesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_proshows -> {
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_info -> {
-                switchFragment(UpdatesFragment())
+                switchFragment(InfoFragment())
                 return@OnNavigationItemSelectedListener true
             }
 

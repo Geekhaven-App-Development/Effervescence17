@@ -1,14 +1,19 @@
 package org.effervescence.app17.activities
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
-
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.organizer_layout.view.*
 import org.effervescence.app17.R
+import org.effervescence.app17.utils.AlarmReceiver
 import org.effervescence.app17.utils.AppDB
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
@@ -22,6 +27,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_detail)
+        remindForEvent(null,"Test","Testing notifs")
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -40,8 +46,14 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            timeTextView.text = SimpleDateFormat("hh:mm a").format(calendar.time)
-            dateTextView.text = SimpleDateFormat("MMMM d, YYYY").format(calendar.time)
+            val sdf = SimpleDateFormat("hh:mm a")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            timeTextView.text = sdf.format(calendar.time)
+
+            sdf.applyPattern("MMMM d, YYYY")
+            dateTextView.text = sdf.format(calendar.time)
+
             locationTextView.text = event.location
 
             headerImageView.scaleType = ImageView.ScaleType.CENTER_CROP
@@ -64,6 +76,21 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
 
             })
 
+            if(event.facebookEventLink.isBlank()){
+                facebookLinkLayout.visibility = View.GONE
+            }
+
+            if(event.organizers.isEmpty()){
+                organizersLayout.visibility = View.GONE
+            }
+
+            if(event.additionalInfo.isEmpty()){
+                additionalInfoLayout.visibility = View.GONE
+            } else {
+                additionalInfoTextView.text = event.additionalInfo.joinToString { "\n" }
+            }
+
+
             bookmarkRL.setOnClickListener({
                 if(appDB.addBookmark(event.id)){
                     toast("Bookmark Added Successfully!!")
@@ -81,5 +108,22 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
         return true
     }
 
+
+    fun remindForEvent(dateTime: Date?, title: String, message: String) {
+
+        val context = baseContext
+        val alarmIntent = Intent(context, AlarmReceiver().javaClass)
+        alarmIntent.putExtra("message", message)
+        alarmIntent.putExtra("title", title)
+
+        val pendingIntent = PendingIntent.getBroadcast(context, 0,
+                alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        //TODO: For demo set after 30 minutes.
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME,
+                SystemClock.elapsedRealtime() + 30 * 60 * 1000, pendingIntent)
+
+    }
 
 }

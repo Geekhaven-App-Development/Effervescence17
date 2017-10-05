@@ -15,7 +15,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="100dp">
-        <include layout="@layout/day_header"/>
+        <include layout="@layout/category_header"/>
 
         <View
             android:id="@+id/header_alpha"

@@ -43,6 +43,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/antic"
                     android:text="My Effervescence"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -67,8 +68,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#e0e0e0"
+                android:fontFamily="@font/antic"
                 android:padding="10dp"
                 android:text="Upcoming Events"
+                android:textAllCaps="false"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -89,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#e0e0e0"
+                android:fontFamily="@font/antic"
                 android:padding="10dp"
                 android:text="Bookmarks"
                 android:textSize="25sp"
@@ -106,6 +110,16 @@
                 android:scrollbarStyle="insideOverlay"
                 android:scrollbars="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Bookmarks!"
+                android:padding="20dp"
+                android:id="@+id/noDataText"
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

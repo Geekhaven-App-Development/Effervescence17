@@ -37,6 +37,10 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
         notifyDataSetChanged()
     }
 
+    fun clearData(){
+        this.events.clear()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItem(context: Context, event: Event) {
             itemView.titleTextView.text = event.name
@@ -44,7 +48,10 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            itemView.timeTextView.text = SimpleDateFormat("hh:mm a  MMMM d, YYYY").format(calendar.time)
+            val sdf = SimpleDateFormat("hh:mm a  MMMM d, YYYY")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            itemView.timeTextView.text = sdf.format(calendar.time)
             itemView.locationTextView.text = event.location
 
             itemView.rootConstraintLayout.setOnClickListener({
@@ -56,6 +63,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .circleCrop()
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.eventImageView)
+
 
         }
     }
