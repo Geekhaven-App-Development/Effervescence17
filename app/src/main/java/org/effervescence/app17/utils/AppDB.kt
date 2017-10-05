@@ -29,7 +29,7 @@ class AppDB private constructor(context: Context) {
 
     fun getAllEvents(): MutableList<Event> = eventHash.getAllValues<Event>()
 
-    fun getAllTeamMembers(): MutableList<Person>? = teamHash.getAllValues<Person>()
+    fun getAllTeamMembers() = teamHash.getAllValues<Person>().sortedBy { it.id }
 
     fun  getAllDeveloperMembers(): MutableList<Developer>? = developerHash.getAllValues<Developer>()
 

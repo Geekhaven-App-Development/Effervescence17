@@ -23,7 +23,6 @@
             android:layout_marginTop="28dp"
             android:background="@drawable/dark_background"
             android:layout_height="52dp"
-            android:title="Effervescence"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
 
             <TextView
@@ -32,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/antic"
-                android:text="Schedule"
+                android:text="Events"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
         </android.support.v7.widget.Toolbar>

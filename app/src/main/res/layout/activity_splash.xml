@@ -14,10 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="80dp"
+        android:scaleType="centerCrop"
         android:contentDescription="@string/effervescence17"
-        android:scaleX="1.4"
-        android:scaleY="1.4"
-        android:src="@drawable/effe2" />
+        android:src="@drawable/white" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"

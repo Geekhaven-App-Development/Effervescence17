@@ -29,7 +29,7 @@ class TeamFragment : Fragment() {
 
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = adapter
-        appDB.getAllTeamMembers()?.let { adapter.addTeam(it) }
+        appDB.getAllTeamMembers().let { adapter.addTeam(it) }
 
     }
 }
