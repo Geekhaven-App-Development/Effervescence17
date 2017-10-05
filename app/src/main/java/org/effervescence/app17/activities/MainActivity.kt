@@ -14,8 +14,15 @@ import org.effervescence.app17.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var currentVal = 0
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        if(currentVal == item.itemId){
+            return@OnNavigationItemSelectedListener true
+        }
+        currentVal = item.itemId
         when (item.itemId) {
+
             R.id.navigation_home -> {
                 switchFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
@@ -25,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                // Temporary: FIX IT
                 switchFragment(UpdatesFragment())
                 return@OnNavigationItemSelectedListener true
             }
@@ -55,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.containerFrame, HomeFragment())
                 .commit()
 
+        currentVal = R.id.navigation_home
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
     }
@@ -77,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun switchFragment(fragment: Fragment){
+
         supportFragmentManager.beginTransaction()
                 .replace(R.id.containerFrame,  fragment)
                 .commit()

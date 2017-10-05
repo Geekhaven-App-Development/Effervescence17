@@ -12,6 +12,7 @@ import org.effervescence.app17.models.Event
 import org.effervescence.app17.utils.AppDB
 import org.effervescence.app17.utils.GlideApp
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +31,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .inflate(R.layout.bookmark_event_layout, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(context, events[position])
+        holder.bindItem(context, this, events[position])
     }
 
     fun addEvents(events: List<Event>) {
@@ -48,7 +49,7 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindItem(context: Context, event: Event) {
+        fun bindItem(context: Context, adapter: BookmarksAdapter, event: Event) {
             itemView.titleTextView.text = event.name
 
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
@@ -71,9 +72,12 @@ class BookmarksAdapter(val context: Context) : RecyclerView.Adapter<BookmarksAda
                     .into(itemView.eventImageView)
 
             // TODO : Refresh layout on removing bookmark
+
             itemView.cancelBookmark.setOnClickListener ({
                 val appDB = AppDB.getInstance(context)
+                adapter.deleteEvent(event)
                 appDB.removeBookmark(event.id)
+                context.toast("Bookmark removed.")
             })
         }
     }

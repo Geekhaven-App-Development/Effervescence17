@@ -59,5 +59,9 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
         itemView.locationTextView.text = ""
         itemView.timeTextView.text = ""
         itemView.dateTextView.text = ""
+
+        itemView.timeTextView.visibility = View.VISIBLE
+        itemView.dateTextView.visibility = View.VISIBLE
+        itemView.locationTextView.visibility = View.VISIBLE
     }
 }

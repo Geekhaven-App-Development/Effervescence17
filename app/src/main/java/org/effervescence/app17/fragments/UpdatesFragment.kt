@@ -54,32 +54,30 @@ class UpdatesFragment: Fragment(){
             val response = client.newCall(request).execute()
             try {
                 if (response.isSuccessful) {
-                    var updatesList: ArrayList<Notification> = ArrayList()
-                    var body = JSONObject(response.body()?.string())
-                    if (body != null) {
-                        var keys = body.keys()
+                    val updatesList: ArrayList<Notification> = ArrayList()
+                    val body = JSONObject(response.body()?.string())
+                    val keys = body.keys()
 
-                        while (keys.hasNext()) {
-                            var key = keys.next().toString()
-                            var childObj = body.getJSONObject(key)
-                            Log.d("akshat", childObj.toString())
-                            if (childObj != null) {
-                                var newNotification = Notification()
-                                newNotification.description = childObj.getString("description")
-                                newNotification.senderName = childObj.getString("senderName")
-                                newNotification.timestamp = childObj.getLong("timestamp")
-                                newNotification.title = childObj.getString("title")
-                                updatesList.add(newNotification)
-                            }
+                    while (keys.hasNext()) {
+                        val key = keys.next().toString()
+                        val childObj = body.getJSONObject(key)
+                        Log.d("akshat", childObj.toString())
+                        if (childObj != null) {
+                            val newNotification = Notification()
+                            newNotification.description = childObj.getString("description")
+                            newNotification.senderName = childObj.getString("senderName")
+                            newNotification.timestamp = childObj.getLong("timestamp")
+                            newNotification.title = childObj.getString("title")
+                            updatesList.add(newNotification)
                         }
-                        uiThread {
-                            updates?.visibility = View.GONE
-                            updates_list?.visibility = View.VISIBLE
-                            val updatesAdapter = UpdatesAdapter(activity, updatesList)
-                            val updatesRecyclerView = updates_list
-                            updatesRecyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-                            updatesRecyclerView?.adapter = updatesAdapter
-                        }
+                    }
+                    uiThread {
+                        updates?.visibility = View.GONE
+                        updates_list?.visibility = View.VISIBLE
+                        val updatesAdapter = UpdatesAdapter(activity, updatesList)
+                        val updatesRecyclerView = updates_list
+                        updatesRecyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+                        updatesRecyclerView?.adapter = updatesAdapter
                     }
                 }
             }catch (e: Exception) {

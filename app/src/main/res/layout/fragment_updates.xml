@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/antic"
-                android:text="UPDATES"
+                android:text="Updates"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large" />
 
         </android.support.v7.widget.Toolbar>
