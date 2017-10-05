@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.activity_event_detail.*
 import kotlinx.android.synthetic.main.updates_layout.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Notification
