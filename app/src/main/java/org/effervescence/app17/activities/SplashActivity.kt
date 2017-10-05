@@ -121,6 +121,7 @@ class SplashActivity : AppCompatActivity(), AnkoLogger {
                 }
             } catch (exception: Exception) {
                 uiThread {
+                    error(exception)
                     animationView.cancelAnimation()
                     if (sharedPrefs.getBoolean("firstrun", true)) {
                         showAlert()
