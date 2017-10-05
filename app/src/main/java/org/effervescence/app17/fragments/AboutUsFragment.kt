@@ -22,12 +22,12 @@ class AboutUsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_about,container,false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view!!.fb_icon.setOnClickListener({
-            val Id = "effervescence.iiita/"
-            val url = "https://www.facebook.com/" + Id
+        view.fb_icon.setOnClickListener({
+            val id = "effervescence.iiita/"
+            val url = "https://www.facebook.com/" + id
             try {
                 context.packageManager.getPackageInfo("com.facebook.katana", 0)
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse("fb://facewebmodal/f?href=" + url))

@@ -1,6 +1,5 @@
 package org.effervescence.app17.recyclerview.adapters
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,16 +14,21 @@ import java.util.*
  * Created by sashank on 1/10/17.
  */
 
-class UpdatesAdapter(val context: Context, val list: ArrayList<Notification>) : RecyclerView.Adapter<UpdatesAdapter.ViewHolder>() {
+class UpdatesAdapter : RecyclerView.Adapter<UpdatesAdapter.ViewHolder>() {
+    val list = ArrayList<Notification>()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = UpdatesAdapter.ViewHolder(LayoutInflater.from(parent!!.context)
-                .inflate(R.layout.updates_layout, parent, false))
-        return v
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+            ViewHolder(LayoutInflater.from(parent!!.context)
+                    .inflate(R.layout.updates_layout, parent, false))
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindItem(list[position])
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder!!.bindItem(list[position])
+    fun updateData(list: List<Notification>){
+        this.list.clear()
+        this.list.addAll(list)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = list.size
@@ -45,7 +49,7 @@ class UpdatesAdapter(val context: Context, val list: ArrayList<Notification>) : 
 
             sdf.applyPattern("MMM d")
             itemView.tv_timestamp.text = notification.timestamp.toString()
-            itemView.tv_timestamp.text = time + " " + sdf.format(calendar.time)
+            itemView.tv_timestamp.text = "$time ${sdf.format(calendar.time)}"
         }
     }
 

@@ -60,7 +60,7 @@ class TeamAdapter(val context: Context) : RecyclerView.Adapter<TeamAdapter.ViewH
                         Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(context as Activity,
-                            arrayOf(Manifest.permission.READ_CONTACTS),
+                            arrayOf(Manifest.permission.CALL_PHONE),
                             requestCode)
                 }
                 else
