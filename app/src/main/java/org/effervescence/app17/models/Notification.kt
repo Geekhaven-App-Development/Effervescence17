@@ -5,9 +5,8 @@ package org.effervescence.app17.models
  */
 
 data class Notification(
-        val eventId: Long = 0,
-        val title: String = "",
-        val description: String = "",
-        val senderName: String="",
-        val timestamp: Long = 0
+        var description: String = "",
+        var senderName: String="",
+        var timestamp: Long = 0,
+        var title: String = ""
 )
