@@ -13,7 +13,7 @@ import org.effervescence.app17.models.Notification
  * Created by sashank on 1/10/17.
  */
 
-class UpdatesAdapter(val context: Context, val list: Array<Notification>) : RecyclerView.Adapter<UpdatesAdapter.ViewHolder>() {
+class UpdatesAdapter(val context: Context, val list: List<Notification>) : RecyclerView.Adapter<UpdatesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val v = UpdatesAdapter.ViewHolder(LayoutInflater.from(parent!!.context)

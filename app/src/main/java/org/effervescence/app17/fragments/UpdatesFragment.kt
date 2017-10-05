@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Notification
+import org.effervescence.app17.models.NotificationMain
 import org.effervescence.app17.recyclerview.adapters.UpdatesAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -23,7 +25,7 @@ import org.jetbrains.anko.uiThread
  * Created by sashank on 1/10/17.
  */
 
-class UpdatesFragment: Fragment() {
+class UpdatesFragment: Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_updates, container, false)
@@ -42,21 +44,11 @@ class UpdatesFragment: Fragment() {
 
     // TODO: FIX IT. Asynchrony issue
     private fun refreshAdapter(view: View){
-        val list = fetchLatestData()
-
-        if(list!= null) {
-            val updatesAdapter = UpdatesAdapter(activity, list)
-            val updatesRecyclerView = view.updates_list
-            updatesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-            updatesRecyclerView.adapter = updatesAdapter
-        }
-        else
-            Toast.makeText(context,"No data available",Toast.LENGTH_SHORT).show()
-
+        fetchLatestData(view)
     }
 
-    private fun fetchLatestData(): Array<Notification>? {
-        var list: Array<Notification>? = null
+    private fun fetchLatestData(view: View){
+        var updates: List<NotificationMain>
         doAsync {
             val client = OkHttpClient()
             val request = Request.Builder()
@@ -64,13 +56,30 @@ class UpdatesFragment: Fragment() {
                     .build()
             val response = client.newCall(request).execute()
             if (response.isSuccessful) {
-                list = Moshi.Builder()
-                        .build()
-                        .adapter<Array<Notification>>(Array<Notification>::class.java)
-                        .fromJson(response.body()?.string())
+                var body = response.body()?.string()
+                body = "[" + body!!.substring(1,body!!.length-1) + "]"
+                Log.d("akshat",body)
 
+                Log.d("akshat",response.body()?.string())
+                val list = Moshi.Builder()
+                        .build()
+                        .adapter<Array<NotificationMain>>(Array<NotificationMain>::class.java)
+                        .fromJson(body)
+                updates = list.toList()
+                Log.d("akshat",response.body()?.string())
+                /*uiThread {
+                    val updatesAdapter = UpdatesAdapter(activity,updates)
+                    val updatesRecyclerView = view.updates_list
+                    updatesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+                    updatesRecyclerView.adapter = updatesAdapter
+                }*/
             }
+            else{
+                uiThread {
+                    Log.d("akshat","else")
+                }
+            }
+
         }
-        return list
     }
 }
