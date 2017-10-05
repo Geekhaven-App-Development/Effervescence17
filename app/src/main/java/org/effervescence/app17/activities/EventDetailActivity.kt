@@ -46,8 +46,14 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/India"))
             calendar.timeInMillis = event.timestamp.times(1000L)
 
-            timeTextView.text = SimpleDateFormat("hh:mm a").format(calendar.time)
-            dateTextView.text = SimpleDateFormat("MMMM d, YYYY").format(calendar.time)
+            val sdf = SimpleDateFormat("hh:mm a")
+            sdf.timeZone = TimeZone.getTimeZone("Asia/India")
+
+            timeTextView.text = sdf.format(calendar.time)
+
+            sdf.applyPattern("MMMM d, YYYY")
+            dateTextView.text = sdf.format(calendar.time)
+
             locationTextView.text = event.location
 
             headerImageView.scaleType = ImageView.ScaleType.CENTER_CROP
@@ -69,6 +75,21 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             reminderRL.setOnClickListener({
 
             })
+
+            if(event.facebookEventLink.isBlank()){
+                facebookLinkLayout.visibility = View.GONE
+            }
+
+            if(event.organizers.isEmpty()){
+                organizersLayout.visibility = View.GONE
+            }
+
+            if(event.additionalInfo.isEmpty()){
+                additionalInfoLayout.visibility = View.GONE
+            } else {
+                additionalInfoTextView.text = event.additionalInfo.joinToString { "\n" }
+            }
+
 
             bookmarkRL.setOnClickListener({
                 if(appDB.addBookmark(event.id)){

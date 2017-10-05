@@ -76,7 +76,6 @@ class UpdatesFragment: Fragment() {
                         .build()
                         .adapter<Array<Notification>>(Array<Notification>::class.java)
                         .fromJson(response.body()?.string())
-
             }
         }
         return list

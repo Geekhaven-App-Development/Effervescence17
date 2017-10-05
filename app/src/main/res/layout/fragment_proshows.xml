@@ -14,7 +14,7 @@
         android:padding="20dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="PROSHOWS"
+        android:text="PRO SHOWS"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:textSize="25sp" />

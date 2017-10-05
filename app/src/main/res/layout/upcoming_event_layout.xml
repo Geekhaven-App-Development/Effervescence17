@@ -23,7 +23,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
     <TextView
-        android:id="@+id/eventTime"
+        android:id="@+id/eventTimeTV"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content"

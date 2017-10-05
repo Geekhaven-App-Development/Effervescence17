@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_schedule -> {
-                switchFragment(DaysViewFragment())
+                switchFragment(EventsViewFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
