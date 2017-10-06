@@ -68,7 +68,6 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                 timeTextView.text = sdf.format(calendar.time)
 
                 sdf.applyPattern("MMMM d, yyyy")
-
                 dateTextView.text = sdf.format(calendar.time)
 
                 locationTextView.text = event.location
