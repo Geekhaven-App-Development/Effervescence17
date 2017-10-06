@@ -76,7 +76,6 @@ class HomeFragment : Fragment() {
 
 
         if(appDB.getBookmarkedEvents()!!.isEmpty()) {
-            Toast.makeText(context, "No Bookmarks!", Toast.LENGTH_SHORT).show()
             view.bookmarksRecyclerView.visibility = View.GONE
             view.noDataText.visibility = View.VISIBLE
         }

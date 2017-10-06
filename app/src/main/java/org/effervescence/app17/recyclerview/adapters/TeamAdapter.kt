@@ -1,5 +1,7 @@
 package org.effervescence.app17.recyclerview.adapters
 
+import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import java.util.*
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 
 
@@ -39,6 +42,9 @@ class TeamAdapter(val context: Context) : RecyclerView.Adapter<TeamAdapter.ViewH
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private lateinit var callNumber: String
+        val requestCode = 123
+
         fun bindItem(context: Context, person: Person) {
             itemView.nameTextView.text = person.name
             itemView.positionTextView.text = person.position
@@ -49,15 +55,16 @@ class TeamAdapter(val context: Context) : RecyclerView.Adapter<TeamAdapter.ViewH
                     .into(itemView.personImageView)
 
             itemView.floatingActionButton.setOnClickListener ({
-                val callNumber = person.contact
-                val intent = Intent(Intent.ACTION_CALL)
-                intent.data = Uri.parse("tel:" + callNumber)
-
-                if(ContextCompat.checkSelfPermission(
-                        context, android.Manifest.permission.CALL_PHONE )
-                        == PackageManager.PERMISSION_GRANTED ) {
-                    context.startActivity(intent)
+                callNumber = person.contact
+                if (ContextCompat.checkSelfPermission(context,
+                        Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(context as Activity,
+                            arrayOf(Manifest.permission.READ_CONTACTS),
+                            requestCode)
                 }
+                else
+                    context.startActivity(Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:" + callNumber)))
             })
         }
     }
