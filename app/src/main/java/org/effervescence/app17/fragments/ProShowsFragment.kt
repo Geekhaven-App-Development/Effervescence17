@@ -49,11 +49,7 @@ class ProShowsFragment : Fragment() {
                 "Vishwas. It is doubtlessly going to be the most congenial event for all poetry lovers out there."
 
         val desc_humour = "The best thing about comedians apart from their wit and talent, is their confidence to bring" +
-                "out the mirth in small things! Known as one of the Rising Stars of Comedy in India," +
-                " is one such comedian, Abijit Ganguly! Tackling the most mundane Indian problems though" +
-                "his humor, he has performed stand up acts all over the country and entertained every generation.\n" +
-                "We're bringing in the pros, to help you forget your woes! So, prepare to burst your lungs out" +
-                "and laugh to the rant of the leading stand up comedian - Mr Abijit Ganguly on the Humor Night of Effervescence'17! \n"
+                "out the mirth in small things! Known as one of the Rising Stars of Comedy in India,"
 
         val pagerAdapter = GlazyFragmentPagerAdapter(childFragmentManager, context)
 
