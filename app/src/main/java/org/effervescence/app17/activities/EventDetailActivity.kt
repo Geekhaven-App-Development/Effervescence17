@@ -1,7 +1,6 @@
 package org.effervescence.app17.activities
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -13,6 +12,7 @@ import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
@@ -25,14 +25,12 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
-import android.util.Log
 
 class EventDetailActivity : AppCompatActivity(), AnkoLogger {
 
     private lateinit var appDB: AppDB
     private lateinit var callNumber: String
-    val mainActivity = this
-    val requestCode = 123
+    private val requestCode = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +87,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
                             Manifest.permission.CALL_PHONE)
                             != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(this,
-                                arrayOf(Manifest.permission.READ_CONTACTS),
+                                arrayOf(Manifest.permission.CALL_PHONE),
                                 requestCode)
                     }
                     else
@@ -102,10 +100,6 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             if (appDB.isBookmarked(event.id)) {
                 bookmarkTV.text = "Bookmarked"
             }
-
-            reminderRL.setOnClickListener({
-
-            })
 
             if (event.facebookEventLink.isBlank()) {
                 facebookLinkLayout.visibility = View.GONE

@@ -24,6 +24,7 @@ import org.json.JSONObject
 
 class UpdatesFragment: Fragment(){
 
+    private lateinit var updatesAdapter : UpdatesAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_updates, container, false)
 
@@ -37,11 +38,16 @@ class UpdatesFragment: Fragment(){
             refreshAdapter(view)
             refresh.isRefreshing = false
         }
+
+        updatesAdapter = UpdatesAdapter()
+        updatesRV.adapter = updatesAdapter
+        updatesRV.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
+
     }
 
 
     private fun refreshAdapter(view: View){
-        updates.visibility = View.GONE
+        noNotifsTV.visibility = View.GONE
         fetchLatestData(view)
     }
 
@@ -72,20 +78,16 @@ class UpdatesFragment: Fragment(){
                         }
                     }
                     uiThread {
-                        updates?.visibility = View.GONE
-                        updates_list?.visibility = View.VISIBLE
-                        val updatesAdapter = UpdatesAdapter(activity, updatesList)
-                        val updatesRecyclerView = updates_list
-                        updatesRecyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-                        updatesRecyclerView?.adapter = updatesAdapter
+                        noNotifsTV?.visibility = View.GONE
+                        updatesRV?.visibility = View.VISIBLE
+                        updatesAdapter.updateData(updatesList)
                     }
                 }
             }catch (e: Exception) {
-                Log.d("akshat",e.toString())
                 uiThread {
-                    updates?.visibility = View.VISIBLE
-                    updates?.text = "No Notifications !!"
-                    updates_list?.visibility = View.GONE
+                    noNotifsTV?.visibility = View.VISIBLE
+                    noNotifsTV?.text = "No Notifications !!"
+                    updatesRV?.visibility = View.GONE
                 }
             }
 
