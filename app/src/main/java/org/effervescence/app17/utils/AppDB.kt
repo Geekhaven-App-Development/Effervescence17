@@ -31,7 +31,7 @@ class AppDB private constructor(context: Context) {
 
     fun getAllTeamMembers() = teamHash.getAllValues<Person>().sortedBy { it.id }
 
-    fun  getAllDeveloperMembers(): MutableList<Developer>? = developerHash.getAllValues<Developer>()
+    fun getAllDeveloperMembers() = developerHash.getAllValues<Developer>().sortedBy { it.id }
 
     fun getEventsOfCategory(category: String) = eventHash.getAllValues<Event>()
             .filter { it.categories.contains(category) }
