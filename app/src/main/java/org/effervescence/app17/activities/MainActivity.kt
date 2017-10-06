@@ -1,5 +1,8 @@
 package org.effervescence.app17.activities
 
+import android.app.FragmentManager
+import android.app.FragmentTransaction
+import android.app.PendingIntent.getActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -11,8 +14,15 @@ import org.effervescence.app17.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var currentVal = 0
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        if(currentVal == item.itemId){
+            return@OnNavigationItemSelectedListener true
+        }
+        currentVal = item.itemId
         when (item.itemId) {
+
             R.id.navigation_home -> {
                 switchFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
@@ -22,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                // Temporary: FIX IT
                 switchFragment(UpdatesFragment())
                 return@OnNavigationItemSelectedListener true
             }
@@ -34,7 +43,12 @@ class MainActivity : AppCompatActivity() {
                 switchFragment(InfoFragment())
                 return@OnNavigationItemSelectedListener true
             }
-
+        }
+        val backStackEntry = supportFragmentManager.backStackEntryCount
+        if (backStackEntry > 0) {
+            for (i in 0 until backStackEntry) {
+                supportFragmentManager.popBackStackImmediate()
+            }
         }
         false
     }
@@ -47,8 +61,19 @@ class MainActivity : AppCompatActivity() {
                 .add(R.id.containerFrame, HomeFragment())
                 .commit()
 
+        currentVal = R.id.navigation_home
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val backStackEntry = supportFragmentManager.backStackEntryCount
+        if (backStackEntry > 0) {
+            for (i in 0 until backStackEntry) {
+                supportFragmentManager.popBackStackImmediate()
+            }
+        }
     }
 
     private fun goFullScreen(){
@@ -59,6 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun switchFragment(fragment: Fragment){
+
         supportFragmentManager.beginTransaction()
                 .replace(R.id.containerFrame,  fragment)
                 .commit()

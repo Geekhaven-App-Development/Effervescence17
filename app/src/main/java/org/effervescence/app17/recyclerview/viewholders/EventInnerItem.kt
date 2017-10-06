@@ -38,7 +38,7 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
 
             itemView.timeTextView.text = sdf.format(calendar.time)
 
-            sdf.applyPattern("MMMM d, YYYY")
+            sdf.applyPattern("MMMM d, yyyy")
             itemView.dateTextView.text = sdf.format(calendar.time)
         }
 
@@ -59,5 +59,9 @@ class EventInnerItem(itemView: View) : InnerItem(itemView) {
         itemView.locationTextView.text = ""
         itemView.timeTextView.text = ""
         itemView.dateTextView.text = ""
+
+        itemView.timeTextView.visibility = View.VISIBLE
+        itemView.dateTextView.visibility = View.VISIBLE
+        itemView.locationTextView.visibility = View.VISIBLE
     }
 }
