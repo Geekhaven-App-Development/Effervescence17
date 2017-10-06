@@ -45,7 +45,6 @@ class DeveloperAdapter(val context: Context) : RecyclerView.Adapter<DeveloperAda
                     .circleCrop()
                     .placeholder(R.drawable.ic_event)
                     .into(itemView.personImageView)
-
           itemView.floatingActionButton.setOnClickListener {
                 openChromeTab(context,developer.gitHubLink)
           }

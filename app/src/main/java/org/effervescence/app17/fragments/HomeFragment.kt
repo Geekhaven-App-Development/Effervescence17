@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.effervescence.app17.R
 import org.effervescence.app17.recyclerview.adapters.BookmarksAdapter
 import org.effervescence.app17.recyclerview.adapters.UpcomingAdapter
