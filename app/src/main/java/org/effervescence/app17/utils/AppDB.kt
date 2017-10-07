@@ -3,10 +3,7 @@ package org.effervescence.app17.utils
 import android.content.Context
 import net.rehacktive.waspdb.WaspDb
 import net.rehacktive.waspdb.WaspFactory
-import org.effervescence.app17.models.Developer
-import org.effervescence.app17.models.Event
-import org.effervescence.app17.models.Person
-import org.effervescence.app17.models.Sponsor
+import org.effervescence.app17.models.*
 
 /**
  * Created by betterclever on 16/09/17.
