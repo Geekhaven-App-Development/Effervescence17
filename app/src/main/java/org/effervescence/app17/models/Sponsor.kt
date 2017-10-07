@@ -9,5 +9,6 @@ data class Sponsor(
         var name: String = "",
         var imageUrl: String = "",
         var categories: List<String> = emptyList(),
+        var website: String = "",
         var priority: Int = -1
 )

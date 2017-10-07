@@ -30,7 +30,7 @@ class DeveloperFragment: Fragment(){
 
         view.recyclerView.layoutManager = LinearLayoutManager(context)
         view.recyclerView.adapter = adapter
-        appDB.getAllDeveloperMembers()?.let { adapter.addDeveloper(it) }
+        appDB.getAllDeveloperMembers().let { adapter.addDeveloper(it) }
         //Log.d("DATA", appDB.getAllDeveloperMembers()?.toString())
 
     }

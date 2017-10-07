@@ -48,6 +48,8 @@ public class GlazyCardFragment extends Fragment {
 
         GlazyImageView imgView = (GlazyImageView) v.findViewById(R.id.glazy_image_view);
         imgView.setImageRes(card.getImageRes());
+
+
         imgView.setTitleText(card.getTitle());
         imgView.setTitleTextColor(card.getTitleColor());
         imgView.setTitleTextSize(Utils.dpToPx(mContext, card.getTitleSizeDP()));
