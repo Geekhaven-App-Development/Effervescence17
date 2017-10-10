@@ -17,17 +17,20 @@
         android:id="@+id/eventNameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:fontFamily="@font/aref_ruqaa"
         android:gravity="center"
-        tools:text="Event Name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="Event Name" />
 
     <TextView
         android:id="@+id/eventTimeTV"
         android:layout_width="match_parent"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:text="EventTime" />
+        android:gravity="center"
+        android:text="EventTime"
+        android:textSize="14sp" />
 
 </LinearLayout>
 

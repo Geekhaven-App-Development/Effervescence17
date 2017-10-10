@@ -4,8 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.squareup.moshi.Moshi
 import kotlinx.android.synthetic.main.activity_splash.*
 import okhttp3.OkHttpClient
@@ -13,8 +13,8 @@ import okhttp3.Request
 import org.effervescence.app17.R
 import org.effervescence.app17.models.Developer
 import org.effervescence.app17.models.Event
-import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.models.Person
+import org.effervescence.app17.models.Sponsor
 import org.effervescence.app17.utils.AnimatorListenerAdapter
 import org.effervescence.app17.utils.AppDB
 import org.jetbrains.anko.*
