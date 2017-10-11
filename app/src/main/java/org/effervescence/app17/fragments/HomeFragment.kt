@@ -68,7 +68,7 @@ class HomeFragment : Fragment() {
         bookmarksRecyclerView.adapter = bookmarksAdapter
 
         upcomingAdapter.addEvents(appDB.getAllEvents()
-                .filter { it.timestamp > System.currentTimeMillis() / 1000L }
+                .filter { (it.timestamp - 5 * 60 * 60 - 30 * 60 ) > System.currentTimeMillis() / 1000L }
                 .sortedBy { it.timestamp }
                 .subList(0, 10))
 
