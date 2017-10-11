@@ -35,9 +35,10 @@ class EventsViewFragment : Fragment() {
         eventData["Fine Arts"] = appDB.getEventsOfCategory("fine arts")
         eventData["AMS"] = appDB.getEventsOfCategory("AMS")
         eventData["Literature"] = appDB.getEventsOfCategory("literature")
+        eventData["Gaming"] = appDB.getEventsOfCategory("gaming")
         eventData["Informal"] = appDB.getEventsOfCategory("informal")
 
-        val categories = arrayOf("Main Stage", "Dramatics", "Music", "Dance", "Fine Arts", "AMS", "Literature", "Informal")
+        val categories = arrayOf("Main Stage", "Dramatics", "Music", "Dance", "Fine Arts", "AMS", "Literature", "Gaming" , "Informal")
         initRecyclerView(categories, eventData)
     }
 

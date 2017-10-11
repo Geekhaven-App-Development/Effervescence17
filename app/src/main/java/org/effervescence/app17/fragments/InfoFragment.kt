@@ -20,9 +20,8 @@ import java.util.ArrayList
 
 class InfoFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_info, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_info, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +40,7 @@ class InfoFragment : Fragment() {
 
     private inner class InfoFragmentAdapter internal constructor(fragmentManager: FragmentManager, fragmentList: List<Fragment>) : FragmentStatePagerAdapter(fragmentManager) {
 
-        private val titles = arrayOf("TEAM", "DEVELOPERS", "SPONSERS", "ABOUT")
+        private val titles = arrayOf("TEAM", "DEVELOPERS", "SPONSORS", "ABOUT")
         internal var fragments: MutableList<Fragment> = ArrayList()
 
         init {
@@ -53,12 +52,8 @@ class InfoFragment : Fragment() {
             return fragments[position]
         }
 
-        override fun getCount(): Int {
-            return titles.size
-        }
+        override fun getCount(): Int = titles.size
 
-        override fun getPageTitle(position: Int): CharSequence {
-            return titles[position]
-        }
+        override fun getPageTitle(position: Int): CharSequence = titles[position]
     }
 }

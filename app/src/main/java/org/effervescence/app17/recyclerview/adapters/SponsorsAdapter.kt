@@ -1,6 +1,8 @@
 package org.effervescence.app17.recyclerview.adapters
 
 import android.content.Context
+import android.net.Uri
+import android.support.customtabs.CustomTabsIntent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -24,9 +26,7 @@ class SponsorsAdapter(private val sponsorsList: List<Sponsor>, val context: Cont
         holder.bindItem(sponsorsList[position])
     }
 
-    override fun getItemCount(): Int {
-        return sponsorsList.size
-    }
+    override fun getItemCount() = sponsorsList.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -34,6 +34,12 @@ class SponsorsAdapter(private val sponsorsList: List<Sponsor>, val context: Cont
             itemView.sponsor_category.text = sponsor.categories.joinToString(",")
             itemView.sponsor_name.text = sponsor.name
             Picasso.with(context).load(sponsor.imageUrl).into(itemView.sponsor_image)
+            itemView.sponsorLayout.setOnClickListener ({
+                val builder = CustomTabsIntent.Builder()
+                val customTabsIntent = builder.build()
+                if(sponsor.website.isNotEmpty())
+                    customTabsIntent.launchUrl(context, Uri.parse(sponsor.website))
+            })
         }
     }
 

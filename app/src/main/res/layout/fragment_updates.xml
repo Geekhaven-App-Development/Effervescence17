@@ -63,7 +63,7 @@
         android:textSize="20sp"
         android:padding="20dp"
         android:layout_gravity="center"
-        android:text="No Notifications !!"
+        android:text="No Notifications!!"
         android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>
