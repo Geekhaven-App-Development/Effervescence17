@@ -69,7 +69,7 @@ class ProShowsFragment : Fragment() {
 
         pagerAdapter.addCardItem(
                 GlazyCard()
-                        .withTitle("CELEB NIGHT")
+                        .withTitle("MTV Beats Night")
                         .withSubTitle("15th October")
                         .withDescription(desc_celeb.toUpperCase())
                         .withImageRes(imgFarhan)
@@ -79,7 +79,7 @@ class ProShowsFragment : Fragment() {
 
         pagerAdapter.addCardItem(
                 GlazyCard()
-                        .withTitle("Supersonic NIGHT")
+                        .withTitle("Supersonic Night")
                         .withSubTitle("13th October")
                         .withDescription(desc_edm.toUpperCase())
                         .withImageRes(imgEDM)
