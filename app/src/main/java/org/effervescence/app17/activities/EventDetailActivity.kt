@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -125,13 +126,13 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
             })
 
             reminderRL.setOnClickListener({
-                if (event.timestamp > 100L) {
+                if ((event.timestamp - 330 * 60) > System.currentTimeMillis() / 1000L) {
                     toast("Reminder Added Successfully!!")
                     if (event.location.isEmpty())
-                        remindForEvent(calendar.timeInMillis, "Reminder!!",
+                        remindForEvent(event.timestamp, "Reminder!!",
                                 event.name + " is about to start!")
                     else
-                        remindForEvent(calendar.timeInMillis, "Reminder!!",
+                        remindForEvent(event.timestamp, "Reminder!!",
                                 event.name + " is about to start. Reach " + event.location + "!")
                 }
             })
@@ -170,7 +171,7 @@ class EventDetailActivity : AppCompatActivity(), AnkoLogger {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         //Reminder at 10 minutes before the event
-        alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, time - 10 * 10 * 1000, pendingIntent)
+        alarmManager.setExact(AlarmManager.RTC, time * 1000 - 5 * 60 * 60 * 1000 - 40 * 60 * 1000, pendingIntent)
 
         //For testing...
         //alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 10 * 1000 , pendingIntent)
